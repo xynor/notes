@@ -1,0 +1,5 @@
+*.swp
+nohup.out
+/.idea
+_book
+node_modules
