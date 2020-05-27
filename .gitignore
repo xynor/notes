@@ -3,3 +3,5 @@ nohup.out
 /.idea
 _book
 node_modules
+**/images_raw
+**/examples
