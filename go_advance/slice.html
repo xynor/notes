@@ -182,17 +182,21 @@
                                 <section class="normal markdown-section">
                                 
                                 <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
-<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
-<h2 id="slice-&#x7ED3;&#x6784;">Slice &#x7ED3;&#x6784;</h2>
-<p>&#x6070;&#x5982; <a href="https://blog.golang.org/slices-intro" target="_blank">slice-intro</a> &#x6240;&#x793A;&#xFF0C;slice&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x6570;&#x7EC4;&#x7684;&#x62BD;&#x8C61;&#x3002;&#x5B9A;&#x4E49;&#x5728;runtime/slice.go&#x4E2D;</p>
-<pre><code>    type slice struct {
-        array unsafe.Pointer    //&#x6307;&#x5411;&#x5E95;&#x5C42;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5730;&#x5740;
-        len   int               //slice&#x7684;&#x957F;&#x5EA6;
-        cap   int               //slice&#x7684;&#x5BB9;&#x91CF;
-    }
-</code></pre><p><img src="images/slice-1.png" alt="slice-1"></p>
-<h2 id="&#x601D;&#x8003;&#x5982;&#x4E0B;&#x95EE;&#x9898;">&#x601D;&#x8003;&#x5982;&#x4E0B;&#x95EE;&#x9898;</h2>
 <ul>
+<li>slice&#x7C7B;&#x4F3C;&#x4E8E;&#x53D8;&#x957F;&#x6570;&#x7EC4;&#xFF0C;&#x5728;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;1024&#x65F6;&#x6309;&#x7167;&#x4E24;&#x500D;&#x5BB9;&#x91CF;&#x589E;&#x957F;&#xFF0C;&#x5927;&#x4E8E;1024&#x65F6;&#x6309;&#x7167;1/4&#x589E;&#x957F;&#x3002;&#x5BB9;&#x91CF;&#x589E;&#x957F;&#x540E;&#x4F1A;&#x53D1;&#x751F;&#x5185;&#x5B58;&#x5206;&#x914D;&#x548C;&#x62F7;&#x8D1D;&#x3002;</li>
+<li>slice&#x7684;&#x4F20;&#x9012;&#x662F;&#x503C;&#x4F20;&#x9012;&#x3002;&#x4F46;&#x662F;&#x64CD;&#x4F5C;&#x5143;&#x7D20;&#x4ECD;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6307;&#x5411;&#x5E95;&#x5C42;&#x6570;&#x7EC4;&#x7684;&#x6307;&#x9488;&#x3002;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6307;&#x5411;slice&#x7684;&#x6307;&#x9488;&#x3002;</li>
+<li>slice&#x7684;&#x5207;&#x5272;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x6307;&#x9488;&#x7684;&#x79FB;&#x52A8;&#x4EE5;&#x53CA;&#x957F;&#x5EA6;&#x548C;&#x5BB9;&#x91CF;&#x7684;&#x6539;&#x53D8;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6CE8;&#x610F;GC&#x3002;</li>
+<li>&#x4F7F;&#x7528;append&#x51FD;&#x6570;&#x4F1A;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#x3002;<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
+</li>
+<li>&#x5C06;slice&#x5F53;&#x4F5C;&#x5165;&#x53C2;&#x8FDB;&#x884C;&#x957F;&#x5EA6;&#xFF0C;&#x5BB9;&#x91CF;&#x4FEE;&#x6539;&#x65F6;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;&#x63A5;&#x53D7;&#x6539;&#x53D8;&#x540E;&#x7684;slice&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4ECE;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x4E86;&#x5927;&#x7684;slice&#x800C;&#x53EA;&#x9700;&#x8981;&#x5176;&#x4E2D;&#x5F88;&#x5C0F;&#x7684;&#x7247;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8003;&#x8651;GC&#x7684;&#x65F6;&#x5019;&#x5C06;&#x5C0F;&#x7247;&#x6BB5;&#x88C5;&#x5165;&#x65B0;&#x7684;slice&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x5927;&#x7684;slice&#x80FD;&#x88AB;GC&#x3002;<h2 id="slice-&#x7ED3;&#x6784;">Slice &#x7ED3;&#x6784;</h2>
+&#x6070;&#x5982; <a href="https://blog.golang.org/slices-intro" target="_blank">slice-intro</a> &#x6240;&#x793A;&#xFF0C;slice&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x6570;&#x7EC4;&#x7684;&#x62BD;&#x8C61;&#x3002;&#x5B9A;&#x4E49;&#x5728;runtime/slice.go&#x4E2D;<pre><code>  type slice struct {
+      array unsafe.Pointer    //&#x6307;&#x5411;&#x5E95;&#x5C42;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5730;&#x5740;
+      len   int               //slice&#x7684;&#x957F;&#x5EA6;
+      cap   int               //slice&#x7684;&#x5BB9;&#x91CF;
+  }
+</code></pre><img src="images/slice-1.png" alt="slice-1"><h2 id="&#x601D;&#x8003;&#x5982;&#x4E0B;&#x95EE;&#x9898;">&#x601D;&#x8003;&#x5982;&#x4E0B;&#x95EE;&#x9898;</h2>
+</li>
 <li>&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;<pre><code>  //&#x521B;&#x5EFA;len&#x4E3A;8&#xFF0C;cap&#x4E3A;10&#x7684;slice
   a := make([]int, 8, 10)
   for k, _ := range a {
@@ -307,7 +311,7 @@ func (sp IntSlice) appendElem() {
       elem:[0 1 2 3 4 5 6 7 8 9 123 456 789],ptr:0xc0000ca1e0,len:13,cap:20
 
   */
-</code></pre><p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x6307;&#x9488;&#x548C;&#x503C;&#x7684;&#x533A;&#x522B;</p>
+</code></pre><p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x6307;&#x9488;&#x548C;&#x503C;&#x7684;&#x533A;&#x522B;<br><a href="https://github.com/xinxuwang/notes/blob/master/go_advance/examples/slice/main.go" target="_blank">&#x5B8C;&#x6574;&#x4EE3;&#x7801;</a></p>
 </li>
 </ul>
 
@@ -349,7 +353,7 @@ func (sp IntSlice) appendElem() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-05-27T10:21:07.079Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-27T10:22:25.881Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-05-28T14:27:42.217Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-28T14:29:28.443Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
