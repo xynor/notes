@@ -3,9 +3,11 @@
 * slice的传递是值传递。但是操作元素仍然有效，因为使用的是指向底层数组的指针。当然也可以使用指向slice的指针。
 * slice的切割本质上是指针的移动以及长度和容量的改变，所以需要注意GC。
 * 使用append函数会进行内存拷贝。
+* 使用make创建的slice返回的也是值。
 ## 使用建议
 * 将slice当作入参进行长度，容量修改时最好使用函数返回值接受改变后的slice。
 * 如果从文件读取了大的slice而只需要其中很小的片段，可以在考虑GC的时候将小片段装入新的slice，以保证大的slice能被GC。
+* 可能的话尽量指定slice的cap,以减少内存分配和拷贝。
 ## Slice 结构
 恰如 [slice-intro](https://blog.golang.org/slices-intro) 所示，slice实际上是数组的抽象。定义在runtime/slice.go中
 ````
@@ -34,12 +36,16 @@
 	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
 	a = append(a, 44, 55, 66)
 	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
+	appendElem(a)
+	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
 	/*
 		elem:[0 1 2 3 4 5 6 7],ptr:0xc0000b8000,len:8,cap:10
 		elem:[2 3],ptr:0xc0000b8010,len:2,cap:8
 		elem:[2 3 88 99],ptr:0xc0000b8010,len:4,cap:8
 		elem:[2 3 88 99 6 7 0 0],ptr:0xc0000b8010,len:8,cap:8
-		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000be000,len:11,cap:16
+		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
+		appendElem elem:[2 3 88 99 6 7 0 0 44 55 66 123 456 789],ptr:0xc0000c6000,len:14,cap:16
+		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
 	*/
 ````
 从上面的例子可以看出

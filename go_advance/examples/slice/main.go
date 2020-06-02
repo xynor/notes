@@ -30,12 +30,16 @@ func main() {
 	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
 	a = append(a, 44, 55, 66)
 	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
+	appendElem(a)
+	fmt.Printf("elem:%v,ptr:%p,len:%d,cap:%d\n", a, &a[0], len(a), cap(a))
 	/*
 		elem:[0 1 2 3 4 5 6 7],ptr:0xc0000b8000,len:8,cap:10
 		elem:[2 3],ptr:0xc0000b8010,len:2,cap:8
 		elem:[2 3 88 99],ptr:0xc0000b8010,len:4,cap:8
 		elem:[2 3 88 99 6 7 0 0],ptr:0xc0000b8010,len:8,cap:8
-		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000be000,len:11,cap:16
+		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
+		appendElem elem:[2 3 88 99 6 7 0 0 44 55 66 123 456 789],ptr:0xc0000c6000,len:14,cap:16
+		elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
 	*/
 	array := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	b := array[:]
