@@ -1,0 +1,346 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Map · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="slice.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Go语言高级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="slice.html">
+            
+                <a href="slice.html">
+            
+                    
+                    Slice
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="map.html">
+            
+                <a href="map.html">
+            
+                    
+                    Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Map</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<ul>
+<li>map&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x3002;</li>
+<li>map&#x662F;&#x4E00;&#x4E2A;HashTable&#xFF0C;&#x4F7F;&#x7528;&#x94FE;&#x8868;&#x89E3;&#x51B3;Hash&#x51B2;&#x7A81;&#xFF0C;&#x67E5;&#x627E;&#x6548;&#x7387;&#x4E3A;O(1)&#x3002;</li>
+<li>map&#x662F;<code>&#x6307;&#x9488;</code>(<code>&#x5F15;&#x7528;</code>)&#x4F20;&#x9012;&#x3002;</li>
+<li>&#x6269;&#x5BB9;&#x53D1;&#x751F;&#x5728;&#x6DFB;&#x52A0;&#xFF0C;&#x5220;&#x9664;&#xFF0C;&#x4FEE;&#x6539;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E76;&#x4E14;&#x4E00;&#x6B21;&#x53EA;&#x642C;&#x8FC1;1&#x5230;2&#x4E2A;bmap&#x3002;</li>
+<li>&#x904D;&#x5386;map&#x662F;&#x65E0;&#x5E8F;&#x7684;&#x3002;</li>
+<li>key&#x7684;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x4E3A;bool,numeric,string,pointer,channel,interface,array,struct&#x8FD9;&#x4E9B;&#x53EF;&#x4EE5;&#x6BD4;&#x8F83;(==)&#x7684;&#x3002;&#x4E0D;&#x80FD;&#x4E3A;slice,map,func&#x3002;</li>
+<li>map&#x4E0D;&#x4F1A;&#x6536;&#x7F29;[&#x4E0D;&#x518D;&#x4F7F;&#x7528;]&#x7684;&#x7A7A;&#x95F4;&#x3002;GC&#x65F6;key,value&#x5982;&#x679C;&#x662F;&#x5E26;&#x6709;&#x6307;&#x9488;&#x5B57;&#x6BB5;&#xFF0C;&#x5219;&#x4F1A;&#x626B;&#x63CF;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;value&#x6709;&#x6307;&#x9488;&#x6BD4;&#x6CA1;&#x6709;&#x6307;&#x9488;gc&#x6162;&#x3002;<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
+</li>
+<li>&#x7528;string&#x548C;numeric&#x7684;&#x7C7B;&#x578B;&#x4E3A;key&#x662F;&#x6709;&#x4F18;&#x5316;&#x7684;&#xFF0C;float&#x7531;&#x4E8E;&#x7CBE;&#x5EA6;&#x95EE;&#x9898;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x3002;</li>
+<li>&#x6839;&#x636E;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x63A7;&#x5236;map&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x6216;&#x8005;&#x5C06;&#x5927;map&#x5206;&#x7247;[]map[interface]interface{}&#x3002;<h2 id="map-&#x7ED3;&#x6784;">Map &#x7ED3;&#x6784;</h2>
+&#x5176;&#x5E95;&#x5C42;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E3A;HashTable&#xFF0C;&#x4F7F;&#x7528;&#x94FE;&#x8868;&#x89E3;&#x51B3;Hash&#x51B2;&#x7A81;&#x3002;&#x5B9A;&#x4E49;&#x5728;runtime/map.go&#x4E2D;<br><img src="images/map-1.png" alt="map-1">
+<a href="https://aimuke.github.io/go/2019/05/16/map/" target="_blank">&#x535A;&#x6587;1</a> <a href="https://studygolang.com/articles/21047?fr=sidebar" target="_blank">&#x535A;&#x6587;2</a> &#x53EF;&#x53C2;&#x8003;<h2 id="&#x521D;&#x59CB;&#x5316;">&#x521D;&#x59CB;&#x5316;</h2>
+</li>
+<li>&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;make&#x521B;&#x5EFA;&#x7684;map&#xFF0C;&#x8FD8;&#x662F;&#x76F4;&#x63A5;&#x521D;&#x59CB;&#x5316;(map[int]string{})&#x90FD;&#x4F1A;&#x8FD4;&#x56DE;<em>&#x6307;&#x9488;</em>&#x3002;<pre><code>  m := make(map[string]int)
+  m[&quot;1&quot;] = 1
+  fmt.Println(&quot;map:&quot;, m)
+  add(m)
+  fmt.Println(&quot;map:&quot;, m)
+  n := map[string]int{&quot;1&quot;: 1, &quot;2&quot;: 2}
+  fmt.Println(&quot;map:&quot;, n)
+  add(n)
+  fmt.Println(&quot;map:&quot;, n)
+  /*
+      map: map[1:1]
+      add map: map[1:1 22:22]
+      map: map[1:1 22:22]
+      map: map[1:1 2:2]
+      add map: map[1:1 2:2 22:22]
+      map: map[1:1 2:2 22:22]
+  */
+</code></pre><pre><code>func add(ma map[string]int) {
+  ma[&quot;22&quot;] = 22
+  fmt.Println(&quot;add map:&quot;, ma)
+}
+</code></pre></li>
+<li>&#x4E3A;&#x4E86;&#x5185;&#x5B58;&#x7D27;&#x51D1;&#x548C;&#x5FEB;&#x901F;&#x67E5;&#x627E;&#xFF0C;&#x4E00;&#x4E2A;bmap&#x4E2D;&#x6709;[8]topHash&#xFF0C;[8]keys&#x548C;[8]values&#x3002;</li>
+<li>&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x6548;&#x7387;&#xFF0C;&#x521B;&#x5EFA;&#x7684;bmap&#x4E3A;2&#x7684;B&#x6B21;&#x5E42;&#x3002;<h2 id="&#x67E5;&#x627E;">&#x67E5;&#x627E;</h2>
+</li>
+<li>&#x6839;&#x636E;key&#x751F;&#x6210;hash,&#x5C06;hash&#x5206;&#x6210;&#x9AD8;&#x516B;&#x4F4D;(topHash)&#xFF0C;&#x548C;&#x4F4E;B&#x4F4D;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x5BF9;&#x4F4E;B&#x4F4D;&#x53D6;&#x6A21;(&#x4F18;&#x5316;&#x4E3A;&#x4F4D;&#x8FD0;&#x7B97;)&#xFF0C;&#x5F97;&#x5230;hash&#x6876;&#x7684;&#x7F16;&#x53F7;&#x3002;&#x5982;&#x679C;&#x6B63;&#x5728;&#x6269;&#x5BB9;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;bucket&#x8FD8;&#x6CA1;&#x642C;&#x5230;&#x65B0;&#x7684;hash&#x8868;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4ECE;&#x8001;&#x7684;hash&#x8868;&#x4E2D;&#x67E5;&#x627E;(&#x901A;&#x8FC7;topHash[0]&#x5224;&#x65AD;)&#x3002;</li>
+<li>&#x5FEB;&#x901F;&#x904D;&#x5386;topHash&#xFF0C;&#x627E;&#x5230;&#x76F8;&#x7B49;&#x7684;&#x518D;&#x8FDB;&#x4E00;&#x6B65;&#x6BD4;&#x8F83;key&#x662F;&#x5426;&#x76F8;&#x7B49;&#x3002;&#x76F8;&#x7B49;&#x5219;&#x8FD4;&#x56DE;value&#xFF0C;&#x4E0D;&#x7B49;&#x5219;&#x904D;&#x5386;&#x6B64;bmap&#x7684;&#x4E0B;&#x4E00;&#x4E2A;bmap&#x3002;</li>
+<li>&#x904D;&#x5386;&#x540C;&#x4E00;&#x4E2A;&#x6876;&#x7684;&#x6240;&#x6709;bmap&#x90FD;&#x6CA1;&#x6709;&#x76F8;&#x7B49;&#x7684;key&#xFF0C;&#x5219;&#x8FD4;&#x56DE;value&#x7684;&#x96F6;&#x503C;&#x3002;<h2 id="&#x63D2;&#x5165;">&#x63D2;&#x5165;</h2>
+</li>
+<li>&#x5728;&#x5B9A;&#x4F4D;&#x5230;bucket&#x540E;&#xFF0C;&#x5982;&#x679C;&#x6B63;&#x5728;&#x6269;&#x5BB9;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x524D;bmap&#x6CA1;&#x6709;&#x642C;&#x8FC1;&#xFF0C;&#x8FDB;&#x884C;&#x642C;&#x8FC1;&#x3002;</li>
+<li>&#x5728;bucket&#x4E2D;&#x5BFB;&#x627E;key&#xFF0C;&#x540C;&#x65F6;&#x8BB0;&#x5F55;&#x4E0B;&#x7B2C;&#x4E00;&#x4E2A;&#x7A7A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5728;&#x7A7A;&#x4F4D;&#x7F6E;&#x4E2D;&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF1B;&#x5982;&#x679C;&#x627E;&#x5230;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x66F4;&#x65B0;&#x5BF9;&#x5E94;&#x7684;value&#x3002;</li>
+<li>&#x627E;&#x4E0D;&#x5230;key&#x5C31;&#x770B;&#x9700;&#x4E0D;&#x9700;&#x8981;&#x6269;&#x5BB9;&#xFF0C;&#x9700;&#x8981;&#x6269;&#x5BB9;&#x5E76;&#x4E14;&#x6CA1;&#x6709;&#x6B63;&#x5728;&#x6269;&#x5BB9;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8FDB;&#x884C;&#x6269;&#x5BB9;&#xFF0C;&#x7136;&#x540E;&#x56DE;&#x5230;&#x7B2C;&#x4E00;&#x6B65;&#x3002;</li>
+<li>&#x627E;&#x4E0D;&#x5230;key&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6269;&#x5BB9;&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x7A7A;slot&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5206;&#x914D;&#x4E00;&#x4E2A;overflow bucket&#x6302;&#x5728;&#x94FE;&#x8868;&#x7ED3;&#x5C3E;&#xFF0C;&#x7528;&#x65B0;bucket&#x7684;&#x7B2C;&#x4E00;&#x4E2A;slot&#x653E;&#x5B58;&#x653E;&#x6570;&#x636E;&#x3002;<h2 id="&#x5220;&#x9664;">&#x5220;&#x9664;</h2>
+</li>
+<li>&#x5982;&#x679C;&#x6B63;&#x5728;&#x6269;&#x5BB9;&#xFF0C;&#x5E76;&#x4E14;&#x8981;&#x64CD;&#x4F5C;&#x7684;bucket&#x6CA1;&#x6709;&#x642C;&#x8FC1;&#x5B8C;&#xFF0C;&#x642C;&#x8FC1;&#x6B64;bucket&#x3002;</li>
+<li>&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;topHash&#x4F4D;&#x7F6E;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A;empty&#x3002;&#x5982;&#x679C;key&#x548C;value&#x5305;&#x542B;&#x4E86;&#x6307;&#x9488;&#x5219;&#x91CA;&#x653E;&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x5185;&#x5B58;&#x3002;<h2 id="&#x6269;&#x5BB9;">&#x6269;&#x5BB9;</h2>
+</li>
+<li><h3 id="&#x6269;&#x5BB9;&#x7684;&#x65B9;&#x5F0F;">&#x6269;&#x5BB9;&#x7684;&#x65B9;&#x5F0F;</h3>
+<ul>
+<li>&#x76F8;&#x540C;&#x5BB9;&#x91CF;&#x7684;&#x6269;&#x5BB9;:<br>&#x5728;map&#x4E0D;&#x65AD;&#x7684;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x540E;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;overflow&#x8FC7;&#x591A;&#xFF0C;&#x4E2D;&#x95F4;&#x69FD;&#x4F4D;&#x5F88;&#x591A;&#x4E3A;&#x7A7A;&#xFF0C;&#x4E0D;&#x5229;&#x4E8E;&#x904D;&#x5386;key&#x3002;&#x6B64;&#x65F6;&#x9700;&#x8981;&#x5C06;slot&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x7D27;&#x51D1;&#x3002;</li>
+<li>&#x4E24;&#x500D;&#x5BB9;&#x91CF;&#x7684;&#x6269;&#x5BB9;:<br>&#x7A7A;&#x95F4;&#x786E;&#x5B9E;&#x4E0D;&#x591F;&#x7528;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x6269;&#x5BB9;&#x5230;&#x539F;&#x6765;&#x7684;&#x4E24;&#x500D;&#x3002;  </li>
+</ul>
+</li>
+<li><h3 id="&#x6269;&#x5BB9;&#x7684;&#x6761;&#x4EF6;">&#x6269;&#x5BB9;&#x7684;&#x6761;&#x4EF6;</h3>
+<ul>
+<li>overflow&#x7684;bucket&#x6570;&#x91CF;&#x8FC7;&#x591A;&#xFF0C;&#x5BF9;&#x5E94;&#x76F8;&#x540C;&#x5BB9;&#x91CF;&#x6269;&#x5BB9;&#x3002;</li>
+<li>&#x88C5;&#x8F7D;&#x56E0;&#x5B50;&#x8FC7;&#x5927;&#xFF0C;&#x5BF9;&#x5E94;&#x4E24;&#x500D;&#x5BB9;&#x91CF;&#x6269;&#x5BB9;&#x3002;</li>
+</ul>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="slice.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Slice">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Map","level":"1.2.2","depth":2,"previous":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/map.md","mtime":"2020-06-02T15:27:11.976Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-02T15:28:16.295Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -61,6 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="map.html" />
+    
     
     <link rel="prev" href="./" />
     
@@ -131,6 +133,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.2" data-path="map.html">
+            
+                <a href="map.html">
+            
+                    
+                    Map
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -186,10 +201,12 @@
 <li>slice&#x7C7B;&#x4F3C;&#x4E8E;&#x53D8;&#x957F;&#x6570;&#x7EC4;&#xFF0C;&#x5728;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;1024&#x65F6;&#x6309;&#x7167;&#x4E24;&#x500D;&#x5BB9;&#x91CF;&#x589E;&#x957F;&#xFF0C;&#x5927;&#x4E8E;1024&#x65F6;&#x6309;&#x7167;1/4&#x589E;&#x957F;&#x3002;&#x5BB9;&#x91CF;&#x589E;&#x957F;&#x540E;&#x4F1A;&#x53D1;&#x751F;&#x5185;&#x5B58;&#x5206;&#x914D;&#x548C;&#x62F7;&#x8D1D;&#x3002;</li>
 <li>slice&#x7684;&#x4F20;&#x9012;&#x662F;&#x503C;&#x4F20;&#x9012;&#x3002;&#x4F46;&#x662F;&#x64CD;&#x4F5C;&#x5143;&#x7D20;&#x4ECD;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6307;&#x5411;&#x5E95;&#x5C42;&#x6570;&#x7EC4;&#x7684;&#x6307;&#x9488;&#x3002;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6307;&#x5411;slice&#x7684;&#x6307;&#x9488;&#x3002;</li>
 <li>slice&#x7684;&#x5207;&#x5272;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x6307;&#x9488;&#x7684;&#x79FB;&#x52A8;&#x4EE5;&#x53CA;&#x957F;&#x5EA6;&#x548C;&#x5BB9;&#x91CF;&#x7684;&#x6539;&#x53D8;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6CE8;&#x610F;GC&#x3002;</li>
-<li>&#x4F7F;&#x7528;append&#x51FD;&#x6570;&#x4F1A;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#x3002;<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
+<li>&#x4F7F;&#x7528;append&#x51FD;&#x6570;&#x4F1A;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#x3002;</li>
+<li>&#x4F7F;&#x7528;make&#x521B;&#x5EFA;&#x7684;slice&#x8FD4;&#x56DE;&#x7684;&#x4E5F;&#x662F;&#x503C;&#x3002;<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
 </li>
 <li>&#x5C06;slice&#x5F53;&#x4F5C;&#x5165;&#x53C2;&#x8FDB;&#x884C;&#x957F;&#x5EA6;&#xFF0C;&#x5BB9;&#x91CF;&#x4FEE;&#x6539;&#x65F6;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;&#x63A5;&#x53D7;&#x6539;&#x53D8;&#x540E;&#x7684;slice&#x3002;</li>
-<li>&#x5982;&#x679C;&#x4ECE;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x4E86;&#x5927;&#x7684;slice&#x800C;&#x53EA;&#x9700;&#x8981;&#x5176;&#x4E2D;&#x5F88;&#x5C0F;&#x7684;&#x7247;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8003;&#x8651;GC&#x7684;&#x65F6;&#x5019;&#x5C06;&#x5C0F;&#x7247;&#x6BB5;&#x88C5;&#x5165;&#x65B0;&#x7684;slice&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x5927;&#x7684;slice&#x80FD;&#x88AB;GC&#x3002;<h2 id="slice-&#x7ED3;&#x6784;">Slice &#x7ED3;&#x6784;</h2>
+<li>&#x5982;&#x679C;&#x4ECE;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x4E86;&#x5927;&#x7684;slice&#x800C;&#x53EA;&#x9700;&#x8981;&#x5176;&#x4E2D;&#x5F88;&#x5C0F;&#x7684;&#x7247;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8003;&#x8651;GC&#x7684;&#x65F6;&#x5019;&#x5C06;&#x5C0F;&#x7247;&#x6BB5;&#x88C5;&#x5165;&#x65B0;&#x7684;slice&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x5927;&#x7684;slice&#x80FD;&#x88AB;GC&#x3002;</li>
+<li>&#x53EF;&#x80FD;&#x7684;&#x8BDD;&#x5C3D;&#x91CF;&#x6307;&#x5B9A;slice&#x7684;cap,&#x4EE5;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x5206;&#x914D;&#x548C;&#x62F7;&#x8D1D;&#x3002;<h2 id="slice-&#x7ED3;&#x6784;">Slice &#x7ED3;&#x6784;</h2>
 &#x6070;&#x5982; <a href="https://blog.golang.org/slices-intro" target="_blank">slice-intro</a> &#x6240;&#x793A;&#xFF0C;slice&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x6570;&#x7EC4;&#x7684;&#x62BD;&#x8C61;&#x3002;&#x5B9A;&#x4E49;&#x5728;runtime/slice.go&#x4E2D;<pre><code>  type slice struct {
       array unsafe.Pointer    //&#x6307;&#x5411;&#x5E95;&#x5C42;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5730;&#x5740;
       len   int               //slice&#x7684;&#x957F;&#x5EA6;
@@ -212,12 +229,16 @@
   fmt.Printf(&quot;elem:%v,ptr:%p,len:%d,cap:%d\n&quot;, a, &amp;a[0], len(a), cap(a))
   a = append(a, 44, 55, 66)
   fmt.Printf(&quot;elem:%v,ptr:%p,len:%d,cap:%d\n&quot;, a, &amp;a[0], len(a), cap(a))
+  appendElem(a)
+  fmt.Printf(&quot;elem:%v,ptr:%p,len:%d,cap:%d\n&quot;, a, &amp;a[0], len(a), cap(a))
   /*
       elem:[0 1 2 3 4 5 6 7],ptr:0xc0000b8000,len:8,cap:10
       elem:[2 3],ptr:0xc0000b8010,len:2,cap:8
       elem:[2 3 88 99],ptr:0xc0000b8010,len:4,cap:8
       elem:[2 3 88 99 6 7 0 0],ptr:0xc0000b8010,len:8,cap:8
-      elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000be000,len:11,cap:16
+      elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
+      appendElem elem:[2 3 88 99 6 7 0 0 44 55 66 123 456 789],ptr:0xc0000c6000,len:14,cap:16
+      elem:[2 3 88 99 6 7 0 0 44 55 66],ptr:0xc0000c6000,len:11,cap:16
   */
 </code></pre>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x53EF;&#x4EE5;&#x770B;&#x51FA;<ol>
 <li>cap&#x4EE3;&#x8868;&#x4E86;slice&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x786E;&#x5B9A;&#x4E86;&#x3002;</li>
@@ -341,10 +362,14 @@ func (sp IntSlice) appendElem() {
 
             
                 
-                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Go语言高级">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Go语言高级">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="map.html" class="navigation navigation-next " aria-label="Next page: Map">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -353,7 +378,7 @@ func (sp IntSlice) appendElem() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-05-28T14:27:42.217Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-28T14:29:28.443Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"next":{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-06-02T15:27:11.977Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-02T15:28:16.295Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
