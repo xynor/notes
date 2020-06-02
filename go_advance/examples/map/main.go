@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+type MapStruct struct {
+	Name string
+	Age  int
+}
+
 func main() {
 	m := make(map[string]int)
 	m["1"] = 1
@@ -20,6 +25,23 @@ func main() {
 		add map: map[1:1 2:2 22:22]
 		map: map[1:1 2:2 22:22]
 	*/
+	mapStruct := make(map[MapStruct]int)
+	a := MapStruct{
+		Name: "a",
+		Age:  0,
+	}
+	b := MapStruct{
+		Name: "a",
+		Age:  1,
+	}
+	c := MapStruct{
+		Name: "a",
+		Age:  2,
+	}
+	mapStruct[a] = a.Age
+	mapStruct[b] = b.Age
+	mapStruct[c] = c.Age
+	fmt.Println("mapStruct:", mapStruct)
 }
 func change(ma map[string]int) {
 	ma["1"] = 22

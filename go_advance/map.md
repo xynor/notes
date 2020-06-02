@@ -4,9 +4,11 @@
 * map是`指针`(`引用`)传递。
 * 扩容发生在添加，删除，修改的时候，并且一次只搬迁1到2个bmap。
 * 遍历map是无序的。
+* key的类型可以为bool,numeric,string,pointer,channel,interface,array,struct这些可以比较(==)的。不能为slice,map,func。
+* map不会收缩[不再使用]的空间。GC时key,value如果是带有指针字段，则会扫描，这也是为什么value有指针比没有指针gc慢。
 ## 使用建议
-* dfs
-* dsf
+* 用string和numeric的类型为key是有优化的，float由于精度问题，需要注意。
+* 根据使用场景，控制map的大小，或者将大map分片[]map[interface]interface{}。
 ## Map 结构
 其底层数据结构为HashTable，使用链表解决Hash冲突。定义在runtime/map.go中  
 ![map-1](images/map-1.png)
