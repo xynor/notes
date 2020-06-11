@@ -69,3 +69,27 @@ func Benchmark_NoLock(b *testing.B) {
 	lock.Wait()
 	b.Log(k, b.N)
 }
+
+type AValue struct {
+	a int64
+	b string
+}
+
+func Benchmark_Value(b *testing.B) {
+	var v atomic.Value
+	v.Store(33)
+	var lock sync.WaitGroup
+	for i := 0; i < b.N; i++ {
+		lock.Add(1)
+		go func() {
+			a, ok := v.Load().(int)
+			if !ok {
+				b.Error("Not ok")
+			}
+			v.Store(a)
+			lock.Done()
+		}()
+	}
+	lock.Wait()
+	b.Log(v.Load(), b.N)
+}
