@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go语言高级 · GitBook</title>
+        <title>SyncMap · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="slice.html" />
+    <link rel="next" href="cas.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="map.html" />
     
 
     </head>
@@ -106,7 +106,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -146,7 +146,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="syncMap.html">
+        <li class="chapter active" data-level="1.2.3" data-path="syncMap.html">
             
                 <a href="syncMap.html">
             
@@ -207,7 +207,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go语言高级</a>
+        <a href=".." >SyncMap</a>
     </h1>
 </div>
 
@@ -222,9 +222,42 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;">Go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;</h2>
-<p><a href="https://draveness.me/golang/" target="_blank">&#x63A8;&#x8350;</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/44585993" target="_blank">https://zhuanlan.zhihu.com/p/44585993</a><br><a href="https://studygolang.com/articles/24537" target="_blank">https://studygolang.com/articles/24537</a><br><a href="https://www.cnblogs.com/buyicoding/p/12117370.html" target="_blank">https://www.cnblogs.com/buyicoding/p/12117370.html</a><br><a href="https://blog.csdn.net/iteye_9288/article/details/82681406" target="_blank">https://blog.csdn.net/iteye_9288/article/details/82681406</a></p>
+                                <h2 id="&#x5E76;&#x53D1;&#x5B89;&#x5168;&#x7684;map">&#x5E76;&#x53D1;&#x5B89;&#x5168;&#x7684;Map</h2>
+<ul>
+<li>&#x7531;&#x4E8E;map&#x672C;&#x8EAB;&#x4E0D;&#x662F;&#x5E76;&#x53D1;&#x5B89;&#x5168;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x4E86;sync.Map&#x3002;  </li>
+<li>map&#x672C;&#x8EAB;&#x914D;&#x5408;&#x8BFB;&#x5199;&#x9501;&#xFF0C;&#x4E92;&#x65A5;&#x9501;&#x80FD;&#x8FBE;&#x5230;&#x5E76;&#x53D1;&#x5B89;&#x5168;&#x3002;&#x4F46;&#x662F;&#x6548;&#x7387;&#x4F4E;&#x3002;<a href="https://medium.com/@deckarep/the-new-kid-in-town-gos-sync-map-de24a6bf7c2c" target="_blank">Benchmark</a></li>
+<li><p>sync.Map&#x4F7F;&#x7528;&#x4E86;&#x8BFB;&#x5199;&#x5206;&#x79BB;&#x7684;&#x7F13;&#x5B58;&#x8BBE;&#x8BA1;&#x3002;&#x8BFB;&#x7684;map&#x4F7F;&#x7528;&#x4E86;lock-free&#x7684;&#x8BBE;&#x8BA1;&#x3002;<br><a href="https://zhuanlan.zhihu.com/p/44585993" target="_blank">&#x535A;&#x6587;</a>  </p>
+<h2 id="&#x6570;&#x636E;&#x7ED3;&#x6784;">&#x6570;&#x636E;&#x7ED3;&#x6784;</h2>
+<pre><code>  type Map struct {
+      mu sync.Mutex
+      read atomic.Value // readOnly
+      dirty map[interface{}]*entry
+      misses int
+  }
+
+  type readOnly struct {
+      m       map[interface{}]*entry
+      amended bool // true if the dirty map contains some key not in m.
+  }
+
+  type entry struct {
+      p unsafe.Pointer // *interface{}
+  }
+</code></pre><ul>
+<li>read&#x7684;map&#x4F7F;&#x7528;atomic.Value&#x6765;&#x4FDD;&#x8BC1;&#x8BFB;&#x5199;&#x7684;<a href="cas.html">&#x539F;&#x5B50;&#x64CD;&#x4F5C;</a>&#x3002;  </li>
+<li>dirty&#x5219;&#x662F;built-in&#x7684;Map&#xFF0C;&#x4F7F;&#x7528;&#x72EC;&#x5360;&#x9501;&#x4FDD;&#x62A4;&#x8BFB;&#x5199;&#x7684;&#x4E00;&#x81F4;&#x6027;&#x3002;</li>
+<li>&#x4E24;&#x4E2A;map&#x4E2D;&#x7684;value&#x90FD;&#x662F;*entry&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x5220;&#x9664;map&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x3002;&#x901A;&#x8FC7;&#x5224;&#x65AD;&#x6307;&#x9488;atomic.CompareAndSwapPointer&#x6765;&#x6807;&#x8BC6;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;lock-free&#x3002;&#x5176;&#x6709;&#x4E24;&#x4E2A;
+&#x72B6;&#x6001;nil&#xFF0C;&#x548C;expunged&#x3002;  </li>
+<li>read Map&#x547D;&#x4E2D;&#x5931;&#x8D25;&#x6B21;&#x6570;&#x591A;&#x540E;&#xFF0C;&#x5C06;dirty Map&#x63D0;&#x5347;&#x4E3A;read Map&#x3002;&#x6240;&#x4EE5;&#x6574;&#x4E2A;sync.Map&#x6709;&#x673A;&#x4F1A;&#x7F29;&#x5C0F;&#x3002;  <h2 id="&#x601D;&#x8003;&#xFF0C;&#x5B66;&#x4E60;">&#x601D;&#x8003;&#xFF0C;&#x5B66;&#x4E60;</h2>
+</li>
+<li>&#x8BFB;&#x5199;&#x5206;&#x79BB;&#x63D0;&#x9AD8;&#x6548;&#x7387;&#x3002;&#x5F15;&#x5165;&#x4E86;&#x8BFB;&#x5199;&#x5206;&#x79BB;&#x7F13;&#x5B58;&#x4E5F;&#x5C31;&#x5F15;&#x5165;&#x4E86;&#x4EE5;&#x4E0B;&#x95EE;&#x9898;  <ol>
+<li>&#x4E00;&#x81F4;&#x6027;:&#x6709;&#x5199;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x4E92;&#x65A5;&#x9501;&#x4FDD;&#x8BC1;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;&#x53EF;&#x89C1;&#x3002;  </li>
+<li>&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#x505A;lock-free&#x3002;  </li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -252,12 +285,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="map.html" class="navigation navigation-prev " aria-label="Previous page: Map">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="slice.html" class="navigation navigation-next " aria-label="Next page: Slice">
+                <a href="cas.html" class="navigation navigation-next " aria-label="Next page: Atomic">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -268,7 +301,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go语言高级","level":"1.2","depth":1,"next":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/README.md","mtime":"2020-06-15T07:38:07.770Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T07:38:14.359Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SyncMap","level":"1.2.3","depth":2,"next":{"title":"Atomic","level":"1.2.4","depth":2,"path":"go_advance/cas.md","ref":"go_advance/cas.md","articles":[]},"previous":{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/syncMap.md","mtime":"2020-06-15T07:38:07.774Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T07:38:14.359Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
