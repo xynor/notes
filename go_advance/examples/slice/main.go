@@ -84,6 +84,12 @@ func main() {
 		elem:[0 1 2 3 4 5 6 7 8 9 123 456 789],ptr:0xc0000ca1e0,len:13,cap:20
 
 	*/
+	data := make([]byte, 0, 32)
+	data = append(data, []byte("bbbbbbbbbb")...)
+	fmt.Printf("%p,%v\n", data, data)
+	data = data[:0]
+	fmt.Printf("%p,%v\n", data, data)
+
 }
 
 func sliceElem(s []int) {

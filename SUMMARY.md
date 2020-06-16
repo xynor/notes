@@ -7,3 +7,4 @@
     * [SyncMap](go_advance/syncMap.md)
     * [Atomic](go_advance/cas.md)
     * [ForRange](go_advance/forRange.md)
+    * [Channel](go_advance/channel.md)
