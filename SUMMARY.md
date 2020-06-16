@@ -6,4 +6,4 @@
     * [Map](go_advance/map.md)
     * [SyncMap](go_advance/syncMap.md)
     * [Atomic](go_advance/cas.md)
-
+    * [ForRange](go_advance/forRange.md)
