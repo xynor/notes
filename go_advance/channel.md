@@ -14,3 +14,5 @@
 * struct{}空结构体，可作为通知消息，比如关闭消息。
 * len,cap是线程安全的，但是取了之后通常就会改变。
 * 传递是值传递，copy。写一次，读一次。
+* 严格的FIFO队列。
+* When a goroutine sends a value to a channel, we can view the goroutine releases the ownership of some values. When a goroutine receives a value from a channel, we can view the goroutine acquires the ownerships of some values

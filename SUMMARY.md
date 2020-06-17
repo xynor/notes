@@ -8,3 +8,10 @@
     * [Atomic](go_advance/cas.md)
     * [ForRange](go_advance/forRange.md)
     * [Channel](go_advance/channel.md)
+    * [Method](go_advance/method.md)
+    * [Closure]
+    * [Interface]
+    * [Reflection]
+    * [Pointer]
+    * [Unsafe Pointer]
+    
