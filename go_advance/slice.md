@@ -5,6 +5,7 @@
 * 使用append函数会进行内存拷贝。
 * 使用make创建的slice返回的也是值。
 ## 使用建议
+* `cars := make([]Car, 2) cars = append(cars, b, bmw) `这种代码要注意cars的长度为4，前两个接口为空。
 * 将slice当作入参进行长度，容量修改时最好使用函数返回值接受改变后的slice。
 * 如果从文件读取了大的slice而只需要其中很小的片段，可以在考虑GC的时候将小片段装入新的slice，以保证大的slice能被GC。
 * 可能的话尽量指定slice的cap,以减少内存分配和拷贝。

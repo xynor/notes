@@ -1,0 +1,20 @@
+## interface{}空接口
+* 数据结构
+````
+type eface struct { // 16 bytes
+	_type *_type
+	data  unsafe.Pointer
+}
+````
+* 包含了type和data，所以nil!=nil。指针也是有type，data的。
+* 使用断言，将interface{}转换成具体类型。v.(type)，a,ok:=v.(int)。
+## 非空interface{}接口
+* 隐式实现的。将接口中的所有函数实现则视为实现了该接口。
+* 小tips，var _ formwork.Agent = (*Agent)(nil)在编译阶段确保该接口被实现。
+* 结构体和指针的实现
+  
+| | 结构体实现       | 指针实现 |
+| :-: | :-: | :-: |
+| 结构体初始化变量 | 通过     | 不通过 |
+| 指针初始化变量   | 通过     | 通过   |  
+* 接口也可以组合。实现了组合接口中所有子接口则为实现了此组合接口。当然其可以转换为任意子接口。
