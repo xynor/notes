@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go语言高级 · GitBook</title>
+        <title>ForRange · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="slice.html" />
+    <link rel="next" href="channel.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="cas.html" />
     
 
     </head>
@@ -106,7 +106,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -172,7 +172,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="forRange.html">
+        <li class="chapter active" data-level="1.2.5" data-path="forRange.html">
             
                 <a href="forRange.html">
             
@@ -272,7 +272,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go语言高级</a>
+        <a href=".." >ForRange</a>
     </h1>
 </div>
 
@@ -287,8 +287,74 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;">Go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;</h2>
-<p><a href="https://draveness.me/golang/" target="_blank">Go &#x8BED;&#x8A00;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;</a><br><a href="https://go101.org/article/101.html" target="_blank">Go 101</a></p>
+                                <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<ul>
+<li>&#x7528;&#x4E8E;&#x5FEB;&#x901F;&#x904D;&#x5386;&#x6570;&#x7EC4;(&#x5B57;&#x7B26;&#x4E32;)&#x3001;&#x5207;&#x7247;&#x3001;Map&#x548C;Channel&#x3002;</li>
+<li>for range a {} &#x904D;&#x5386;&#x3002;&#x4E0D;&#x5173;&#x5FC3;&#x7D22;&#x5F15;&#x548C;&#x6570;&#x636E;&#x3002;&#x6267;&#x884C;len(a)&#x6B21;&#x3002;</li>
+<li>for i := range a {} &#x904D;&#x5386;&#x3002;&#x53EA;&#x5173;&#x5FC3;&#x7D22;&#x5F15;&#x3002;</li>
+<li>for i, elem := range a {} &#x904D;&#x5386;&#x3002;&#x5173;&#x5FC3;&#x7D22;&#x5F15;&#x548C;&#x6570;&#x636E;&#x3002;</li>
+<li>for v := range ch {} &#x963B;&#x585E;&#x5F62;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x5176;&#x4ED6;&#x643A;&#x7A0B;&#x8C03;&#x7528;close(ch)&#xFF0C;&#x5FAA;&#x73AF;&#x7ED3;&#x675F;&#x3002;</li>
+<li>&#x904D;&#x5386;&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#xFF0C;v&#x4F1A;&#x8FD4;&#x56DE;rune&#x7C7B;&#x578B;&#x5E76;&#x89E3;&#x7801;&#x3002;</li>
+<li>v&#x662F;&#x4E34;&#x65F6;&#x53D8;&#x91CF;&#x3002;&#x4E0D;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;a:=&amp;v&#x8D4B;&#x503C;&#x3002;</li>
+<li>&#x904D;&#x5386;Map&#x662F;&#x65E0;&#x5E8F;&#x7684;&#x3002;<h2 id="&#x6CE8;&#x610F;">&#x6CE8;&#x610F;</h2>
+</li>
+<li><p><strong><em>&#x4E0D;&#x8981;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x6539;&#x53D8;slice&#xFF0C;map&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x4E4E;&#x610F;&#x6599;&#x7684;&#x7ED3;&#x679C;</em></strong>&#x3002;</p>
+<h2 id="&#x904D;&#x5386;&#x5B57;&#x7B26;&#x4E32;">&#x904D;&#x5386;&#x5B57;&#x7B26;&#x4E32;</h2>
+<pre><code>func Test_Strings(t *testing.T) {
+  s := &quot;ABCDE&#x54C8;&#x54C8;&#x4E00;&#x4E2A;&quot;
+  t.Log(&quot;len(s):&quot;, len(s))
+  for k, v := range s {
+      t.Log(k, v)
+  }
+  r := []rune(s)
+  t.Log(&quot;len(r):&quot;, len(r))
+  for k, v := range r {
+      t.Log(k, string(v))
+  }
+}
+
+  Test_Strings: forRange_test.go:9: len(s): 17
+  Test_Strings: forRange_test.go:11: 0 65
+  Test_Strings: forRange_test.go:11: 1 66
+  Test_Strings: forRange_test.go:11: 2 67
+  Test_Strings: forRange_test.go:11: 3 68
+  Test_Strings: forRange_test.go:11: 4 69
+  Test_Strings: forRange_test.go:11: 5 21704
+  Test_Strings: forRange_test.go:11: 8 21704
+  Test_Strings: forRange_test.go:11: 11 19968
+  Test_Strings: forRange_test.go:11: 14 20010
+  Test_Strings: forRange_test.go:14: len(r): 9
+  Test_Strings: forRange_test.go:16: 0 A
+  Test_Strings: forRange_test.go:16: 1 B
+  Test_Strings: forRange_test.go:16: 2 C
+  Test_Strings: forRange_test.go:16: 3 D
+  Test_Strings: forRange_test.go:16: 4 E
+  Test_Strings: forRange_test.go:16: 5 &#x54C8;
+  Test_Strings: forRange_test.go:16: 6 &#x54C8;
+  Test_Strings: forRange_test.go:16: 7 &#x4E00;
+  Test_Strings: forRange_test.go:16: 8 &#x4E2A;
+</code></pre><ul>
+<li><p>&#x53EF;&#x4EE5;&#x770B;&#x51FA;v&#x8FD4;&#x56DE;&#x7684;&#x662F;rune&#xFF0C;&#x5E76;&#x4E14;k&#x4E5F;&#x505A;&#x8FC7;&#x76F8;&#x5E94;&#x7684;&#x6539;&#x53D8;&#x3002;utf-8&#xFF0C;&#x4E00;&#x4E2A;&#x4E2D;&#x6587;&#x5360;3&#x4E2A;&#x5B57;&#x8282;&#x3002;</p>
+<h2 id="&#x904D;&#x5386;map">&#x904D;&#x5386;Map</h2>
+<pre><code>func Test_Map(t *testing.T) {
+m := map[int]int{}
+for i := 0; i &lt; 10; i++ {
+   m[i] = i
+}
+
+for _, v := range m {
+   if v == 8 {
+       k := rand.Intn(100) + 10
+       m[k] = 8
+       fmt.Println(&quot;insert:&quot;, k)
+   }
+}
+}
+</code></pre></li>
+<li>&#x591A;&#x8FD0;&#x884C;&#x51E0;&#x6B21;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8F93;&#x51FA;insert&#x7684;&#x6B21;&#x6570;&#x4E0D;&#x4E00;&#x6837;&#x3002;</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -316,12 +382,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="cas.html" class="navigation navigation-prev " aria-label="Previous page: Atomic">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="slice.html" class="navigation navigation-next " aria-label="Next page: Slice">
+                <a href="channel.html" class="navigation navigation-next " aria-label="Next page: Channel">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -332,7 +398,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go语言高级","level":"1.2","depth":1,"next":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/README.md","mtime":"2020-06-17T04:04:19.215Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ForRange","level":"1.2.5","depth":2,"next":{"title":"Channel","level":"1.2.6","depth":2,"path":"go_advance/channel.md","ref":"go_advance/channel.md","articles":[]},"previous":{"title":"Atomic","level":"1.2.4","depth":2,"path":"go_advance/cas.md","ref":"go_advance/cas.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/forRange.md","mtime":"2020-06-16T06:40:37.150Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

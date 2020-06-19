@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go语言高级 · GitBook</title>
+        <title>Interface · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="slice.html" />
     
-    
-    <link rel="prev" href="../" />
+    <link rel="prev" href="closure.html" />
     
 
     </head>
@@ -106,7 +104,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -224,7 +222,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.9" data-path="interface.html">
+        <li class="chapter active" data-level="1.2.9" data-path="interface.html">
             
                 <a href="interface.html">
             
@@ -272,7 +270,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go语言高级</a>
+        <a href=".." >Interface</a>
     </h1>
 </div>
 
@@ -287,8 +285,44 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;">Go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;</h2>
-<p><a href="https://draveness.me/golang/" target="_blank">Go &#x8BED;&#x8A00;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;</a><br><a href="https://go101.org/article/101.html" target="_blank">Go 101</a></p>
+                                <h2 id="interface&#x7A7A;&#x63A5;&#x53E3;">interface{}&#x7A7A;&#x63A5;&#x53E3;</h2>
+<ul>
+<li>&#x6570;&#x636E;&#x7ED3;&#x6784;<pre><code>type eface struct { // 16 bytes
+  _type *_type
+  data  unsafe.Pointer
+}
+</code></pre></li>
+<li>&#x5305;&#x542B;&#x4E86;type&#x548C;data&#xFF0C;&#x6240;&#x4EE5;nil!=nil&#x3002;&#x6307;&#x9488;&#x4E5F;&#x662F;&#x6709;type&#xFF0C;data&#x7684;&#x3002;</li>
+<li>&#x4F7F;&#x7528;&#x65AD;&#x8A00;&#xFF0C;&#x5C06;interface{}&#x8F6C;&#x6362;&#x6210;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#x3002;v.(type)&#xFF0C;a,ok:=v.(int)&#x3002;<h2 id="&#x975E;&#x7A7A;interface&#x63A5;&#x53E3;">&#x975E;&#x7A7A;interface{}&#x63A5;&#x53E3;</h2>
+</li>
+<li>&#x9690;&#x5F0F;&#x5B9E;&#x73B0;&#x7684;&#x3002;&#x5C06;&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x5219;&#x89C6;&#x4E3A;&#x5B9E;&#x73B0;&#x4E86;&#x8BE5;&#x63A5;&#x53E3;&#x3002;</li>
+<li>&#x5C0F;tips&#xFF0C;var _ formwork.Agent = (*Agent)(nil)&#x5728;&#x7F16;&#x8BD1;&#x9636;&#x6BB5;&#x786E;&#x4FDD;&#x8BE5;&#x63A5;&#x53E3;&#x88AB;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>&#x7ED3;&#x6784;&#x4F53;&#x548C;&#x6307;&#x9488;&#x7684;&#x5B9E;&#x73B0;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">&#x7ED3;&#x6784;&#x4F53;&#x5B9E;&#x73B0;</th>
+<th style="text-align:center">&#x6307;&#x9488;&#x5B9E;&#x73B0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#x7ED3;&#x6784;&#x4F53;&#x521D;&#x59CB;&#x5316;&#x53D8;&#x91CF;</td>
+<td style="text-align:center">&#x901A;&#x8FC7;</td>
+<td style="text-align:center">&#x4E0D;&#x901A;&#x8FC7;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#x6307;&#x9488;&#x521D;&#x59CB;&#x5316;&#x53D8;&#x91CF;</td>
+<td style="text-align:center">&#x901A;&#x8FC7;</td>
+<td style="text-align:center">&#x901A;&#x8FC7;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&#x63A5;&#x53E3;&#x4E5F;&#x53EF;&#x4EE5;&#x7EC4;&#x5408;&#x3002;&#x5B9E;&#x73B0;&#x4E86;&#x7EC4;&#x5408;&#x63A5;&#x53E3;&#x4E2D;&#x6240;&#x6709;&#x5B50;&#x63A5;&#x53E3;&#x5219;&#x4E3A;&#x5B9E;&#x73B0;&#x4E86;&#x6B64;&#x7EC4;&#x5408;&#x63A5;&#x53E3;&#x3002;&#x5F53;&#x7136;&#x5176;&#x53EF;&#x4EE5;&#x8F6C;&#x6362;&#x4E3A;&#x4EFB;&#x610F;&#x5B50;&#x63A5;&#x53E3;&#x3002;</li>
+</ul>
 
                                 
                                 </section>
@@ -316,14 +350,10 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="closure.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Closure">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="slice.html" class="navigation navigation-next " aria-label="Next page: Slice">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -332,7 +362,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go语言高级","level":"1.2","depth":1,"next":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/README.md","mtime":"2020-06-17T04:04:19.215Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Interface","level":"1.2.9","depth":2,"previous":{"title":"Closure","level":"1.2.8","depth":2,"path":"go_advance/closure.md","ref":"go_advance/closure.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/interface.md","mtime":"2020-06-18T09:36:09.937Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

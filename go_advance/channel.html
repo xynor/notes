@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go语言高级 · GitBook</title>
+        <title>Channel · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="slice.html" />
+    <link rel="next" href="method.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="forRange.html" />
     
 
     </head>
@@ -106,7 +106,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -185,7 +185,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="channel.html">
+        <li class="chapter active" data-level="1.2.6" data-path="channel.html">
             
                 <a href="channel.html">
             
@@ -272,7 +272,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go语言高级</a>
+        <a href=".." >Channel</a>
     </h1>
 </div>
 
@@ -287,8 +287,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;">Go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;</h2>
-<p><a href="https://draveness.me/golang/" target="_blank">Go &#x8BED;&#x8A00;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;</a><br><a href="https://go101.org/article/101.html" target="_blank">Go 101</a></p>
+                                <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<p><a href="https://go101.org/article/channel.html" target="_blank">&#x535A;&#x6587;</a></p>
+<ul>
+<li>channel&#x662F;<code>&#x6307;&#x9488;</code>(<code>&#x5F15;&#x7528;</code>)&#x4F20;&#x9012;&#x3002;</li>
+<li>&#x5206;&#x4E3A;&#x65E0;&#x7F13;&#x51B2;&#x533A;&#x548C;&#x6709;&#x7F13;&#x51B2;&#x533A;&#x3002;</li>
+<li>&#x65E0;&#x7F13;&#x51B2;&#x533A;&#x662F;Hand By Hand&#x7684;&#x3002;
+<img src="images/unbufferedchannel.png" alt="unbufferedchannel"></li>
+<li>&#x6709;&#x7F13;&#x51B2;&#x533A;&#x7C7B;&#x4F3C;&#x6709;&#x5927;&#x5C0F;&#x7684;&#x961F;&#x5217;&#x3002;&#x4E3A;&#x7A7A;&#x5219;&#x8BFB;&#x963B;&#x585E;&#xFF0C;&#x6EE1;&#x5219;&#x5199;&#x963B;&#x585E;&#x3002;
+<img src="images/bufferedchannel.png" alt="bufferedchannel"></li>
+<li>&#x8BFB;close&#x7684;channel&#x4F1A;&#x9A6C;&#x4E0A;&#x8FD4;&#x56DE;&#x9ED8;&#x8BA4;&#x503C;&#x548C;false&#x3002;&#x53EF;&#x4EE5;&#x591A;&#x6B21;&#x8BFB;&#x3002;&#x591A;&#x4E2A;gorouting&#x90FD;&#x4F1A;&#x8BFB;&#x5230;&#x3002;&#x53EF;&#x4EE5;&#x7528;&#x4F5C;&#x5E7F;&#x64AD;&#x6D88;&#x606F;&#x3002;</li>
+<li>&#x5199;close&#x7684;channel&#x4F1A;panic&#x3002;</li>
+<li>close&#x5DF2;&#x7ECF;&#x5173;&#x95ED;&#x7684;channel&#x4F1A;panic&#x3002;</li>
+<li>&#x4F7F;&#x7528;select&#x53EF;&#x4EE5;&#x5F02;&#x6B65;<strong><em>&#x8BFB;&#x3001;&#x5199;</em></strong>&#x3002;</li>
+<li>for range&#x53EF;&#x4EE5;&#x8FBE;&#x5230;for + &lt;-ch&#x8BFB;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x5F53;&#x5173;&#x95ED;&#x7684;&#x65F6;&#x5019;&#x9000;&#x51FA;&#x3002;</li>
+<li>struct{}&#x7A7A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x53EF;&#x4F5C;&#x4E3A;&#x901A;&#x77E5;&#x6D88;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x5173;&#x95ED;&#x6D88;&#x606F;&#x3002;</li>
+<li>len,cap&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x53D6;&#x4E86;&#x4E4B;&#x540E;&#x901A;&#x5E38;&#x5C31;&#x4F1A;&#x6539;&#x53D8;&#x3002;</li>
+<li>&#x4F20;&#x9012;&#x662F;&#x503C;&#x4F20;&#x9012;&#xFF0C;copy&#x3002;&#x5199;&#x4E00;&#x6B21;&#xFF0C;&#x8BFB;&#x4E00;&#x6B21;&#x3002;</li>
+<li>&#x4E25;&#x683C;&#x7684;FIFO&#x961F;&#x5217;&#x3002;</li>
+<li>When a goroutine sends a value to a channel, we can view the goroutine releases the ownership of some values. When a goroutine receives a value from a channel, we can view the goroutine acquires the ownerships of some values</li>
+</ul>
 
                                 
                                 </section>
@@ -316,12 +334,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="forRange.html" class="navigation navigation-prev " aria-label="Previous page: ForRange">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="slice.html" class="navigation navigation-next " aria-label="Next page: Slice">
+                <a href="method.html" class="navigation navigation-next " aria-label="Next page: Method">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -332,7 +350,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go语言高级","level":"1.2","depth":1,"next":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/README.md","mtime":"2020-06-17T04:04:19.215Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Channel","level":"1.2.6","depth":2,"next":{"title":"Method","level":"1.2.7","depth":2,"path":"go_advance/method.md","ref":"go_advance/method.md","articles":[]},"previous":{"title":"ForRange","level":"1.2.5","depth":2,"path":"go_advance/forRange.md","ref":"go_advance/forRange.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/channel.md","mtime":"2020-06-17T02:00:00.934Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -172,6 +172,71 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.5" data-path="forRange.html">
+            
+                <a href="forRange.html">
+            
+                    
+                    ForRange
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="channel.html">
+            
+                <a href="channel.html">
+            
+                    
+                    Channel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="method.html">
+            
+                <a href="method.html">
+            
+                    
+                    Method
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="closure.html">
+            
+                <a href="closure.html">
+            
+                    
+                    Closure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="interface.html">
+            
+                <a href="interface.html">
+            
+                    
+                    Interface
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -230,6 +295,7 @@
 <li>&#x4F7F;&#x7528;append&#x51FD;&#x6570;&#x4F1A;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#x3002;</li>
 <li>&#x4F7F;&#x7528;make&#x521B;&#x5EFA;&#x7684;slice&#x8FD4;&#x56DE;&#x7684;&#x4E5F;&#x662F;&#x503C;&#x3002;<h2 id="&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;">&#x4F7F;&#x7528;&#x5EFA;&#x8BAE;</h2>
 </li>
+<li><code>cars := make([]Car, 2) cars = append(cars, b, bmw)</code>&#x8FD9;&#x79CD;&#x4EE3;&#x7801;&#x8981;&#x6CE8;&#x610F;cars&#x7684;&#x957F;&#x5EA6;&#x4E3A;4&#xFF0C;&#x524D;&#x4E24;&#x4E2A;&#x63A5;&#x53E3;&#x4E3A;&#x7A7A;&#x3002;</li>
 <li>&#x5C06;slice&#x5F53;&#x4F5C;&#x5165;&#x53C2;&#x8FDB;&#x884C;&#x957F;&#x5EA6;&#xFF0C;&#x5BB9;&#x91CF;&#x4FEE;&#x6539;&#x65F6;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;&#x63A5;&#x53D7;&#x6539;&#x53D8;&#x540E;&#x7684;slice&#x3002;</li>
 <li>&#x5982;&#x679C;&#x4ECE;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x4E86;&#x5927;&#x7684;slice&#x800C;&#x53EA;&#x9700;&#x8981;&#x5176;&#x4E2D;&#x5F88;&#x5C0F;&#x7684;&#x7247;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8003;&#x8651;GC&#x7684;&#x65F6;&#x5019;&#x5C06;&#x5C0F;&#x7247;&#x6BB5;&#x88C5;&#x5165;&#x65B0;&#x7684;slice&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x5927;&#x7684;slice&#x80FD;&#x88AB;GC&#x3002;</li>
 <li>&#x53EF;&#x80FD;&#x7684;&#x8BDD;&#x5C3D;&#x91CF;&#x6307;&#x5B9A;slice&#x7684;cap,&#x4EE5;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x5206;&#x914D;&#x548C;&#x62F7;&#x8D1D;&#x3002;<h2 id="slice-&#x7ED3;&#x6784;">Slice &#x7ED3;&#x6784;</h2>
@@ -404,7 +470,7 @@ func (sp IntSlice) appendElem() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"next":{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},{"title":"SyncMap","level":"1.2.3","depth":2,"path":"go_advance/syncMap.md","ref":"go_advance/syncMap.md","articles":[]},{"title":"Atomic","level":"1.2.4","depth":2,"path":"go_advance/cas.md","ref":"go_advance/cas.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-06-15T07:38:07.773Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T07:38:14.359Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Slice","level":"1.2.1","depth":2,"next":{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},"previous":{"title":"Go语言高级","level":"1.2","depth":1,"path":"go_advance/README.md","ref":"go_advance/README.md","articles":[{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},{"title":"Map","level":"1.2.2","depth":2,"path":"go_advance/map.md","ref":"go_advance/map.md","articles":[]},{"title":"SyncMap","level":"1.2.3","depth":2,"path":"go_advance/syncMap.md","ref":"go_advance/syncMap.md","articles":[]},{"title":"Atomic","level":"1.2.4","depth":2,"path":"go_advance/cas.md","ref":"go_advance/cas.md","articles":[]},{"title":"ForRange","level":"1.2.5","depth":2,"path":"go_advance/forRange.md","ref":"go_advance/forRange.md","articles":[]},{"title":"Channel","level":"1.2.6","depth":2,"path":"go_advance/channel.md","ref":"go_advance/channel.md","articles":[]},{"title":"Method","level":"1.2.7","depth":2,"path":"go_advance/method.md","ref":"go_advance/method.md","articles":[]},{"title":"Closure","level":"1.2.8","depth":2,"path":"go_advance/closure.md","ref":"go_advance/closure.md","articles":[]},{"title":"Interface","level":"1.2.9","depth":2,"path":"go_advance/interface.md","ref":"go_advance/interface.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/slice.md","mtime":"2020-06-18T07:53:01.313Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

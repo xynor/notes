@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go语言高级 · GitBook</title>
+        <title>Method · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="slice.html" />
+    <link rel="next" href="closure.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="channel.html" />
     
 
     </head>
@@ -106,7 +106,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -198,7 +198,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="method.html">
+        <li class="chapter active" data-level="1.2.7" data-path="method.html">
             
                 <a href="method.html">
             
@@ -272,7 +272,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go语言高级</a>
+        <a href=".." >Method</a>
     </h1>
 </div>
 
@@ -287,9 +287,67 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;">Go&#x8BED;&#x8A00;&#x7684;&#x9AD8;&#x7EA7;</h2>
-<p><a href="https://draveness.me/golang/" target="_blank">Go &#x8BED;&#x8A00;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;</a><br><a href="https://go101.org/article/101.html" target="_blank">Go 101</a></p>
+                                <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<ul>
+<li>T&#x5FC5;&#x987B;&#x662F;&#x7528;type&#x91CD;&#x65B0;&#x5B9A;&#x4E49;&#x8FC7;&#x7684;&#xFF0C;&#x4E0D;&#x9650;&#x4E8E;struct,&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x57FA;&#x7840;&#x7C7B;&#x578B;&#x3002;</li>
+<li>T&#x4E0D;&#x80FD;&#x662F;type&#x5B9A;&#x4E49;&#x7684;&#x6307;&#x9488;&#x3002;</li>
+<li>T&#x548C;Method&#x7684;&#x5B9A;&#x4E49;&#x8981;&#x5728;&#x4E00;&#x4E2A;&#x5305;&#x91CC;&#x9762;&#x3002;</li>
+<li>T&#x4E0D;&#x80FD;&#x662F;&#x63A5;&#x53E3;&#x7C7B;&#x578B;&#x3002;</li>
+<li>T&#x548C;*T&#x4F5C;&#x4E3A;Receiver&#x90FD;&#x662F;&#x503C;&#x4F20;&#x9012;&#xFF0C;&#x4F1A;copy&#x3002;</li>
+<li>T&#x4E3A;Receiver&#xFF0C;&#x6539;&#x53D8;&#x4E0D;&#x4F1A;&#x4F20;&#x51FA;&#x6765;&#x3002;</li>
+<li>*T&#x4E3A;Receiver&#xFF0C;&#x6539;&#x53D8;&#x4F1A;&#x4F20;&#x51FA;&#x6765;&#x3002;</li>
+<li>T&#x8C03;&#x7528;<code>*T</code>&#x7684;Receiver&#xFF0C;&#x4F1A;&#x5C06;&amp;T&#x4F20;&#x5165;(t <code>*T</code>)&#x3002;</li>
+<li><code>*T</code>&#x8C03;&#x7528; <code>*T</code>&#x7684;Receiver&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x4F20;&#x5165;(t <code>*T</code>)&#x3002;</li>
+<li><code>*T</code>&#x8C03;&#x7528; <code>T</code>&#x7684;Receiver&#xFF0C;&#x4F1A;&#x5C06;<code>*T</code>&#x4F20;&#x5165;(t <code>T</code>)</li>
+</ul>
+<h2 id="&#x4F8B;&#x5B50;">&#x4F8B;&#x5B50;</h2>
+<pre><code>type Stu struct {
+    Name string
+    Age  int
+}
 
+func (s Stu) SetName(name string) {
+    fmt.Printf(&quot;in s:%p\n&quot;, &amp;s)
+    s.Name = name
+}
+
+func (s *Stu) SetNameP(name string) {
+    fmt.Printf(&quot;in sp:%p\n&quot;, s)
+    s.Name = name
+}
+
+func Test_Pass(t *testing.T) {
+    s := Stu{}
+    fmt.Printf(&quot;out s:%p\n&quot;, &amp;s)
+    s.SetName(&quot;Wang&quot;)
+    fmt.Println(&quot;s:&quot;, s)
+    s.SetNameP(&quot;Wang&quot;)
+    fmt.Println(&quot;s:&quot;, s)
+}
+/*
+out s:0xc0000be080
+in s:0xc0000be0a0
+s: { 0}
+in sp:0xc0000be080
+s: {Wang 0}
+*/
+</code></pre><h2 id="&#x4F8B;&#x5B50;">&#x4F8B;&#x5B50;</h2>
+<pre><code>func Test_PassP(t *testing.T) {
+    s := &amp;Stu{}
+    fmt.Printf(&quot;out s:%p\n&quot;, s)
+    s.SetName(&quot;Wang&quot;)
+    fmt.Println(&quot;s:&quot;, s)
+    s.SetNameP(&quot;Wang&quot;)
+    fmt.Println(&quot;s:&quot;, s)
+}
+/*
+out s:0xc00000c0e0
+in s:0xc00000c100
+s: &amp;{ 0}
+in sp:0xc00000c0e0
+s: &amp;{Wang 0}
+*/
+</code></pre>
                                 
                                 </section>
                             
@@ -316,12 +374,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="channel.html" class="navigation navigation-prev " aria-label="Previous page: Channel">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="slice.html" class="navigation navigation-next " aria-label="Next page: Slice">
+                <a href="closure.html" class="navigation navigation-next " aria-label="Next page: Closure">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -332,7 +390,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go语言高级","level":"1.2","depth":1,"next":{"title":"Slice","level":"1.2.1","depth":2,"path":"go_advance/slice.md","ref":"go_advance/slice.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/README.md","mtime":"2020-06-17T04:04:19.215Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Method","level":"1.2.7","depth":2,"next":{"title":"Closure","level":"1.2.8","depth":2,"path":"go_advance/closure.md","ref":"go_advance/closure.md","articles":[]},"previous":{"title":"Channel","level":"1.2.6","depth":2,"path":"go_advance/channel.md","ref":"go_advance/channel.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/method.md","mtime":"2020-06-17T07:17:53.258Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:24:16.130Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
