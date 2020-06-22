@@ -10,9 +10,6 @@
     * [Channel](go_advance/channel.md)
     * [Method](go_advance/method.md)
     * [Closure](go_advance/closure.md)
-    * [Interface](go_advance/interface.md)
-<!-- 
-    [Reflection]
-    [Pointer]
-    [Unsafe Pointer] 
--->
+    * [Interface](go_advance/interface.md) 
+    * [Reflection](go_advance/reflection.md)
+    * [Pointer](go_advance/pointer.md)

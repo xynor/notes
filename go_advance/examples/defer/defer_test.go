@@ -17,3 +17,5 @@ func Test_A(t *testing.T) {
 	i, e := Call()
 	fmt.Println(i, e)
 }
+
+//TODO panic recover

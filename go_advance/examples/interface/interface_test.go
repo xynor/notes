@@ -63,6 +63,7 @@ func Test_Assert(t *testing.T) {
 type Car interface {
 	Run(int) error
 	GetInfo() (Info, error)
+	ChangeAmount(int)
 }
 type Info struct {
 	Amount int
@@ -83,6 +84,10 @@ func (b *Benz) Run(speed int) error {
 	return nil
 }
 
+func (b *Benz) ChangeAmount(amount int) {
+	b.Amount = amount
+}
+
 type BMW struct {
 	Info
 }
@@ -94,6 +99,10 @@ func (b BMW) Run(i int) error {
 
 func (b BMW) GetInfo() (Info, error) {
 	return b.Info, nil
+}
+
+func (b BMW) ChangeAmount(amount int) {
+	b.Amount = amount
 }
 
 var _ Car = (*BMW)(nil)
@@ -109,6 +118,29 @@ func Test_Benz(t *testing.T) {
 	info, _ := c.GetInfo()
 	fmt.Println("Car INfo:", info)
 	_ = c.Run(3)
+}
+
+func Test_BMW(t *testing.T) {
+	b := BMW{
+		Info: Info{
+			Amount: 100,
+			Height: 4,
+		},
+	}
+	bp := &BMW{
+		Info: Info{
+			Amount: 1000,
+			Height: 0,
+		},
+	}
+	var c Car = b
+	info, _ := c.GetInfo()
+	fmt.Println("Car INfo:", info)
+	_ = c.Run(3)
+	var cp Car = bp
+	info, _ = cp.GetInfo()
+	fmt.Println("Car INfo:", info)
+	_ = cp.Run(3)
 }
 
 func Test_Cars(t *testing.T) {
@@ -151,4 +183,59 @@ func Test_Conbine(t *testing.T) {
 		fmt.Println("Can cast:")
 		cc.Run(2)
 	}
+}
+
+func Test_Change(t *testing.T) {
+	bmw := BMW{}
+	var c Car = bmw
+	c.ChangeAmount(19)
+	info, _ := c.GetInfo()
+	fmt.Println(info)
+	//值不能改变
+	var cp Car = &bmw
+	//虽然是指针，传递的时候被取值
+	cp.ChangeAmount(200)
+	info, _ = cp.GetInfo()
+	fmt.Println(info)
+
+	//指针ok
+	var bCar = &Benz{}
+	bCar.ChangeAmount(1222)
+	info, _ = bCar.GetInfo()
+	fmt.Println(info)
+}
+
+func Test_CarP(t *testing.T) {
+	//报错
+	//var CarP *Car = &BMW{}
+	//报错
+	//var CarP *Car = &Benz{}
+	// *interface{} != interface{}
+	//bmw := BMW{}
+	//PassCarP(&bmw)
+	//benz := &Benz{}
+	//PassCarP(benz)
+}
+
+func PassCarP(carP *Car) {
+	fmt.Println("Call")
+}
+
+func PassInterfaceP(ip *interface{}) {
+	fmt.Println("Call")
+}
+func TestPassInter(t *testing.T) {
+	//bmw := BMW{}
+	//PassInterfaceP(&bmw)
+	//benz := &Benz{}
+	//PassInterfaceP(benz)
+}
+
+func TestPrintInter(t *testing.T) {
+	bmw := BMW{}
+	Print(bmw)
+	benz := &Benz{}
+	Print(benz)
+	Print(&bmw)
+	Print(&benz)
 }
