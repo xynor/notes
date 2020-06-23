@@ -86,7 +86,8 @@ func Test_Value(t *testing.T) {
 	var cs []BMW
 	cs = append(cs, c)
 	tpy := reflect.TypeOf(cs)
-	fmt.Println(tpy.Elem())
+	fmt.Println(tpy.Kind())
+	fmt.Println(tpy.Elem().Kind())
 	//value := reflect.ValueOf(cs)
 	//fmt.Println(value.Elem())
 }
