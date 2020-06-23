@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Closure · GitBook</title>
+        <title>Reflection · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="defer.html" />
+    <link rel="next" href="pointer.html" />
     
     
-    <link rel="prev" href="method.html" />
+    <link rel="prev" href="interface.html" />
     
 
     </head>
@@ -211,7 +211,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.8" data-path="closure.html">
+        <li class="chapter " data-level="1.2.8" data-path="closure.html">
             
                 <a href="closure.html">
             
@@ -250,7 +250,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.11" data-path="reflection.html">
+        <li class="chapter active" data-level="1.2.11" data-path="reflection.html">
             
                 <a href="reflection.html">
             
@@ -311,7 +311,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Closure</a>
+        <a href=".." >Reflection</a>
     </h1>
 </div>
 
@@ -328,16 +328,15 @@
                                 
                                 <h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
 <ul>
-<li>&#x95ED;&#x5305;&#x662F;&#x6709;&#x6570;&#x636E;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x662F;&#x6709;&#x65B9;&#x6CD5;&#x7684;&#x6570;&#x636E;&#x3002;</li>
-<li>&#x95ED;&#x5305;&#x51FD;&#x6570;&#x4F53;&#x4E2D;&#x5305;&#x542B;&#x7684;&#x4F53;&#x5916;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5728;&#x95ED;&#x5305;&#x4E2D;&#x662F;&#x6307;&#x9488;&#xFF0C;&#x6539;&#x53D8;&#x5176;&#x503C;&#x4F1A;&#x5F71;&#x54CD;&#x5916;&#x8FB9;&#x3002;</li>
-<li>&#x95ED;&#x5305;&#x6700;&#x5927;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x53EF;&#x80FD;&#x662F;&#x975E;&#x4FB5;&#x5165;&#x5F0F;&#x7F16;&#x7A0B;&#x4E86;&#x3002;</li>
-<li>&#x95ED;&#x5305;&#x4F1A;&#x7FFB;&#x8BD1;&#x6210;&#x5982;&#x4E0B;</li>
-<li><a href="https://www.calhoun.io/5-useful-ways-to-use-closures-in-go/" target="_blank">&#x4F7F;&#x7528;&#x573A;&#x666F;</a><pre><code>type Closure struct {
-  F func()() 
-  i *int
-  s *struct
-}
-</code></pre></li>
+<li>&#x4E24;&#x79CD;&#x64CD;&#x4F5C;&#xFF0C;TypeOf(&#x5BF9;&#x7C7B;&#x578B;&#x64CD;&#x4F5C;)&#x548C;ValueOf(&#x5BF9;&#x503C;&#x64CD;&#x4F5C;)&#x3002;</li>
+<li>&#x5373;&#x4F7F;&#x662F;&#x4F20;&#x9012;&#x6307;&#x9488;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x5F97;&#x5230;&#x7684;Kind&#x4E5F;&#x662F;ptr&#x3002;&#x4F7F;&#x7528;Elem()&#x76F8;&#x5F53;&#x4E8E;*ptr&#xFF0C;&#x6240;&#x4EE5;&#x591A;&#x6709;&#x9012;&#x5F52;&#x5904;&#x7406;&#x3002;&#x5BF9;&#x975E;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x518D;&#x53D6;Elem()&#xFF0C;&#x5219;panic&#x3002;</li>
+<li>&#x8981;&#x6539;&#x53D8;&#x503C;&#xFF0C;&#x5E94;&#x8BE5;&#x4F20;&#x9012;ValueOf(&amp;v)&#xFF0C;&#x5728;&#x53D6;Elem()&#xFF0C;&#x7C7B;&#x4F3C;&#x6307;&#x9488;&#x4F20;&#x9012;,&#x5728;*p=v&#x8D4B;&#x503C;&#x3002;&#x6CE8;&#x610F;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#x7684;&#x533F;&#x540D;&#x5B57;&#x6BB5;&#x3002;</li>
+<li>&#x540C;&#x6837;&#xFF0C;&#x8981;&#x6539;&#x53D8;&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x503C;&#xFF0C;&#x9700;&#x8981;&#x4F20;&#x9012;&#x6307;&#x9488;&#x7684;&#x6307;&#x9488;&#x3002;&#x5728;&#x53D6;Elem()&#xFF0C;&#x6539;&#x53D8;&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x503C;&#x3002;</li>
+<li>reflect.Value&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;interface&#xFF0C;v.Interface().(Car)&#x3002;</li>
+<li>reflect.Interface&#x7C7B;&#x578B;&#x5728;&#x5207;&#x7247;&#x548C;map&#x662F;interface{}&#x7C7B;&#x578B;&#x7684;Kind&#x65F6;&#x3002;<h2 id="type&#x548C;value&#x62E5;&#x6709;&#x7684;&#x540C;&#x540D;&#x65B9;&#x6CD5;">Type&#x548C;Value&#x62E5;&#x6709;&#x7684;&#x540C;&#x540D;&#x65B9;&#x6CD5;</h2>
+<img src="images/typeVauleMethod.png" alt="typeVauleMethod"><h2 id="type&#x72EC;&#x6709;&#x7684;&#x65B9;&#x6CD5;">Type&#x72EC;&#x6709;&#x7684;&#x65B9;&#x6CD5;</h2>
+<img src="images/typeMethod.png" alt="typeMethod"><h2 id="value&#x72EC;&#x6709;&#x7684;&#x65B9;&#x6CD5;">Value&#x72EC;&#x6709;&#x7684;&#x65B9;&#x6CD5;</h2>
+<img src="images/valueMethod1.png" alt="valueMethod1"><br><img src="images/valueMethod2.png" alt="valueMethod2"></li>
 </ul>
 
                                 
@@ -366,12 +365,12 @@
 
             
                 
-                <a href="method.html" class="navigation navigation-prev " aria-label="Previous page: Method">
+                <a href="interface.html" class="navigation navigation-prev " aria-label="Previous page: Interface">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="defer.html" class="navigation navigation-next " aria-label="Next page: Defer">
+                <a href="pointer.html" class="navigation navigation-next " aria-label="Next page: Pointer">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -382,7 +381,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Closure","level":"1.2.8","depth":2,"next":{"title":"Defer","level":"1.2.9","depth":2,"path":"go_advance/defer.md","ref":"go_advance/defer.md","articles":[]},"previous":{"title":"Method","level":"1.2.7","depth":2,"path":"go_advance/method.md","ref":"go_advance/method.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/closure.md","mtime":"2020-06-19T01:25:41.884Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-23T09:56:56.907Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Reflection","level":"1.2.11","depth":2,"next":{"title":"Pointer","level":"1.2.12","depth":2,"path":"go_advance/pointer.md","ref":"go_advance/pointer.md","articles":[]},"previous":{"title":"Interface","level":"1.2.10","depth":2,"path":"go_advance/interface.md","ref":"go_advance/interface.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"go_advance/reflection.md","mtime":"2020-06-23T09:20:45.523Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-23T09:56:56.907Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
