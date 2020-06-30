@@ -7,7 +7,8 @@
 * Leader负责发送AppendEntries RPC(日志复制，心跳)消息。Leader不会修改和删除日志，只增加。
 * Follower只要在没超时能收到AppendEntries RPC消息，就一直是Follower，心跳超时则认为Leader故障，可以竞选下一任期Leader。
 * Leader如果收到了比自己term大的AppendEntries RPC消息，则认为自己过期了，转为Follower。
-* **写消息需要Leader在操作半数Follower日志提交后再返回给client**。
+* term是持久化保存的，不同的机器维护的term可能不一样，term是一个逻辑时钟。
+* **写消息需要Leader在超过半数Follower日志提交后再返回给client(发送心跳的同时，更新leader commit Index，只要半数复制成功的log，leader会更新自己的commitIndex，再apply到状态机中，再反馈客户端操作成功，最后会等待下一个心跳时间，告知所有的follower更新最新的commitIndex)**。
 * **读消息需要Leader确认一次自己是不是最新的Leader，即发送AppendEntries RPC消息得到半数确认**。
 
 ## 初始化启动
@@ -33,6 +34,17 @@
 ## 原Leader恢复
 * 崩溃的原Leader恢复后，同样先进入Follower，此时收到了Leader的心跳消息。currentTerm是？？？
 * 从Leader的日志中同步丢失的entries。
+
+## 一致性检查
+* follower收到AppendEntries RPCs后，会进行一致性检查。leader为每个follower维护一个nextIndex变量，新上位的leader的nextIndex初始化为当前logs的最后一个log的index+1。
+* 假设leader的logs为：[index1, term=1, cmd1]，[index=2, term=3, cmd2]， [index=3, term=3, cmd3]
+  假设某个follower的log为：[index1, term=1, cmd1]，[index=2, term=1, cmd4]
+  第一次leader的AppendEntries RPC发给某个follower的log为[index=3, term=3, cmd3]这一个log entry，那么AppendEntries RPC同时会携带preLogIndex和preLogTerm两个参数，preLogIndex为要发送的log的前一个index，这里是2。preLogTerm为leader index为2位置的log的term，这里是3。
+  follower在收到AppendEntries RPC后，根据参数中的prevLogIndex，检查自己的log的prevLogIndex处的Entry的term和参数中的prevLogTerm是否相同，如果相同则将参数中的entries拷贝到自己的log中并且返回true，否则返回false。
+  follower在收到leader的AppendEntries RPC后，进行一致性检查，根据参数prevLogIndex=2，发现自己的index为2的log的term为1，和参数preLogTerm（这里是3）不一致。所以什么也不做返回false。
+  leader收到响应后如果发现是false，调整参数然后重新发送AppendEntries RPC。leader将要发送的log改为[index=2, term=3, cmd2]， [index=3, term=3, cmd3]，preLogIndex参数变为了1，preLogTerm参数变为了1。
+  follower在收到这个AppendEntries RPC后，发现自己的index为1的log的term为1，和参数preLogTerm（这里是1）一致。于是就将preLogIndex(这里是1)后的Log（[index=2, term=1, cmd4]）删除，将AppendEntries RPC参数中的log [index=2, term=3, cmd2]， [index=3, term=3, cmd3]加到自己的log后。
+  现在follower的log变为了：[index1, term=1, cmd1]，[index=2, term=3, cmd2]， [index=3, term=3, cmd3]。和leader一致。
 
 ## 分区容忍
 * 当网络出现问题，导致网络分区后，比如5个server被分成3，2。失去Leader的多数将重新选择Leader，而少数有Leader的分区因为Leader不能commit日志而失败。
