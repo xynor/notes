@@ -1,5 +1,6 @@
 ## 并发安全的Map
 * 由于map本身不是并发安全的。所以官方提供了sync.Map。  
+* sync.Map不能copy，其实带锁的结构体都不能copy。
 * map本身配合读写锁，互斥锁能达到并发安全。但是效率低。[Benchmark](https://medium.com/@deckarep/the-new-kid-in-town-gos-sync-map-de24a6bf7c2c)
 * sync.Map使用了读写分离的缓存设计。读的map使用了lock-free的设计。  
 [博文](https://zhuanlan.zhihu.com/p/44585993)  
