@@ -3,3 +3,5 @@ nohup.out
 /.idea
 _book
 node_modules
+**/env
+**/__pycache__
