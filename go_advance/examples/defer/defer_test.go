@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 func Call() (i int, e error) {
@@ -35,4 +36,17 @@ func f() {
 	fmt.Println("a")
 	panic("异常信息")
 	fmt.Println("b") //这里开始下面代码不会再执行
+}
+
+func Test_DeferS(t *testing.T) {
+	ticker := time.NewTicker(2 * time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			fmt.Println("Timer Call")
+			defer func() {
+				fmt.Println("Deferrrr")
+			}()
+		}
+	}
 }
