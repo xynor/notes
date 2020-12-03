@@ -4,4 +4,5 @@ nohup.out
 _book
 node_modules
 **/env
+**/*.log
 **/__pycache__
