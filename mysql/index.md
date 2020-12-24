@@ -31,3 +31,8 @@
 ## Null
 * 在字段不允许为null的情况下，查询is null或is not null都不走索引
 * 在字段允许为null的情况下，查询is null或is not null可以走索引
+## 对Null的处理
+* A,B,C做为列名时，有一个为Null，A+B+C都为Null
+* count(*)包含Null，count(具体列名)忽略null项，count(null)为0
+* avg,max,min,sum都是忽略null值
+* group by，distinct，order by将null单独做为一项

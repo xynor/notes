@@ -14,4 +14,4 @@
 * mvcc每一行多出两个隐藏字段，创建时间(事务ID)和删除时间(事务ID)
 * 查询时，只会查找创建时间小于等于当前时间，保证在查询时行数据存在。和 行的删除版本要么未定义，要么大于当前事务版本，保证行数据在事务开始前未删除
 * 通过mvcc解决了select读的幻读问题，但是在B事务删除某行后，A事务再update(写)会出错。
-* 读是读的快照片，写需要最新版本数据。如果select要当前读则需要加锁select * from table where ? lock in share mode;select * from table where ? for update;
+* 读是读的快照，写需要最新版本数据。如果select要当前读则需要加锁select * from table where ? lock in share mode;select * from table where ? for update;
