@@ -3,7 +3,7 @@
 * 简单的key-value,适用于分布式锁，计数器(原子操作),分布式全局id
 * 最大512M空间,使用预分配，惰性释放
 ## List
-* 双向链表，最大2^32-1,可以实现栈，队列，有限集合，简单的消息队列
+* 双向链表，最大2^32-1,可以实现栈，队列，有限集合，简单的消息队列  
 ````
 redis 127.0.0.1:6379> LPUSH runoobkey redis
 (integer) 1
@@ -12,7 +12,6 @@ redis 127.0.0.1:6379> LPUSH runoobkey mongodb
 redis 127.0.0.1:6379> LPUSH runoobkey mysql
 (integer) 3
 redis 127.0.0.1:6379> LRANGE runoobkey 0 10
-
 1) "mysql"
 2) "mongodb"
 3) "redis"
