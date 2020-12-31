@@ -2,6 +2,7 @@ syntax = "proto3";
 
 //包名，通过protoc生成时go文件时
 package message;
+import "google/protobuf/any.proto";
 
 //手机类型
 //枚举类型第一个字段必须为0
@@ -15,6 +16,7 @@ enum PhoneType {
 message Phone {
     PhoneType type = 1;
     string number = 2;
+    repeated google.protobuf.Any data = 3;
 }
 
 //人
@@ -33,4 +35,4 @@ message ContactBook {
 }
 //先安装protoc
 //go get -u github.com/golang/protobuf/protoc-gen-go
-//protoc --go_out=. *.pb
+//protoc --go_out=. *.proto
