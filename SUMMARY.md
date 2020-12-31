@@ -17,6 +17,7 @@
 * [协议](protocol/README.md)
     * [Raft](protocol/raft/raft.md)
     * [ConsistentHash](protocol/consistenthashing/consistenthashing.md)
+    * [http2](protocol/http2/http2.md)
 * [Redis](redis/README.md)
     * [DataType](redis/datatype.md)
     * [Persistence](redis/persistence.md)
