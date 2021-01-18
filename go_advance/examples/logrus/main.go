@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./log"
 	"github.com/sirupsen/logrus"
+	"go_advance/examples/logrus/log"
 )
 
 //方式一：logrus函数（最终调用的是logrus.StandardLogger默认实例方法）

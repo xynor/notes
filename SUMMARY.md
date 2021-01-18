@@ -14,6 +14,7 @@
     * [Interface](go_advance/interface.md)
     * [Reflection](go_advance/reflection.md)
     * [Pointer](go_advance/pointer.md)
+    * [Grpc](go_advance/grpc.md)
 * [协议](protocol/README.md)
     * [Raft](protocol/raft/raft.md)
     * [ConsistentHash](protocol/consistenthashing/consistenthashing.md)

@@ -3,6 +3,7 @@ syntax = "proto3";
 //包名，通过protoc生成时go文件时
 package message;
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 //手机类型
 //枚举类型第一个字段必须为0
@@ -17,6 +18,7 @@ message Phone {
     PhoneType type = 1;
     string number = 2;
     repeated google.protobuf.Any data = 3;
+    string key_value = 4;
 }
 
 //人
@@ -32,6 +34,18 @@ message Person {
 //联系簿
 message ContactBook {
     repeated Person persons = 1;
+    google.protobuf.Timestamp last_update = 2;
+}
+//map
+message MapTest{
+    map<string, string> maptest = 1;
+}
+//Oneof
+message OneofMessage {
+  oneof test_oneof {
+    string name = 1;
+    int32 age  = 2;
+  }
 }
 //先安装protoc
 //go get -u github.com/golang/protobuf/protoc-gen-go
