@@ -48,6 +48,7 @@ func main() {
 * socket的写队列不满时可以非阻塞返回写了多少字节，当写队列满时，write阻塞
 * 当在写的过程中，对方关闭socket，将收到RST报文，如果继续写返回错误broken pipe，则此次的write返回的n需要特殊处理
 * 写超时，时间敏感的情况下设置SetWriteDeadline，也存在写入部分数据返回错误和n
+* 只有在写出错，broken pipe或写超时的时候才会写入部分数据并且返回错误和n，```正常写是阻塞写完buffer，err==nil,n==len(buffer)```
 ## net.conn实现了io.Reader和io.Writer接口可以用bufio包下面的Writer和Reader、io/ioutil下的函数等。io.ReadFull(t.conn, preface)
 ## 并发安全
 * 读和写都是有锁保护的，多个协程读可能使一个业务报文读到几个协程中。多个协程写，需要确保不能把一个业务包分别用几个协程写。这会导致业务包不连续
@@ -59,3 +60,9 @@ func main() {
 * 读写携程分开
 * 做了tcp的frame协议，在read的时候使用io.ReadFull(t.conn, preface)读frame长度
 * 业务需要写的时候直接发到dequeue中(共享内存)，通知channel，通知写协程从dequeue中拿出报文写socket
+## socket对错误的反馈能力是有限的
+* 对端异常关闭(OS没有发FIN包)/网络延迟大，如果本端阻塞在read上，那么将永远等待，除非设置超时
+* 本端先write了数据，并read等待。重传超时则read会收到ETIMEDOUT/EHOSTUNREACH/ENETUNREACH错误
+* 对端恰好恢复，收到本端包。对端不能识别，返回RST，本端read返回ECONNREST
+* write错误，最终通过read通知应用有点阴差阳错
+* keepalive,应用层心跳
