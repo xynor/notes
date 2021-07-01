@@ -11,16 +11,24 @@ func Init(level logrus.Level, logPath, serverName string) (err error) {
 	logrus.SetFormatter(&logrus.JSONFormatter{
 		TimestampFormat: "2006-01-02 15:04:05",
 	})
-	logfile, err := os.OpenFile(logPath, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0644)
-	if err != nil {
-		return
-	}
-	mw := io.MultiWriter(os.Stdout, logfile)
+	// rotate writer
+	//rotateLog, err := rotatelogs.New(
+	//	logPath+".%Y%m%d",
+	//	rotatelogs.WithLinkName(logPath),
+	//	rotatelogs.WithRotationTime(24*time.Hour),
+	//	rotatelogs.WithMaxAge(10*365*24*time.Hour), //10 years
+	//)
+	//if err != nil {
+	//	return
+	//}
+
+	//mw := io.MultiWriter(os.Stdout, rotateLog)
+	//Use stdout for current dev
+	mw := io.MultiWriter(os.Stdout)
 	logrus.SetOutput(mw)
 	logrus.SetLevel(level)
 	logrus.AddHook(hooks.NewCallStackHook())
 	logrus.AddHook(hooks.NewServerHook(serverName))
 
-	logrus.WithFields(logrus.Fields{"serverName": serverName})
 	return
 }

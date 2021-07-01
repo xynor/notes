@@ -4,6 +4,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"sync"
 	"testing"
+	"time"
 )
 
 func init() {
@@ -22,4 +23,11 @@ func TestGoutine(t *testing.T) {
 	}
 	sy.Wait()
 	logrus.Errorln("end")
+}
+
+func TestRotate(t *testing.T) {
+	for {
+		logrus.Infoln("test rotate")
+		time.Sleep(10 * time.Second)
+	}
 }

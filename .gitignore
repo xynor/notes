@@ -5,3 +5,6 @@
 .vimprojects
 *.swp
 nohup.out
+*.log.*
+matchEngine/matchEngine
+matchEngine/matchEngine.exe
