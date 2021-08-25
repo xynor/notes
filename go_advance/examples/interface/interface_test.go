@@ -239,3 +239,14 @@ func TestPrintInter(t *testing.T) {
 	Print(&bmw)
 	Print(&benz)
 }
+
+func work(arr []interface{}) {
+	fmt.Println(arr)
+}
+
+func TestSliceInterface(t *testing.T) {
+	//ss := []string{"hello", "golang"}
+	//work(ss) //不能协变
+	st := []interface{}{"hello", "golang"}
+	work(st)
+}
