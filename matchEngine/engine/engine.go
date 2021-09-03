@@ -30,14 +30,14 @@ func (e *Engine) Match(order *types.Order) {
 					logrus.Debugf("sell[price:%v,qty:%v] is taken all", preOrder.Price, preOrder.Qty)
 					n = el.Next()
 					e.SellDepth.Remove(el)
-					order.Qty.Sub(order.Qty, preOrder.Qty)
+					order.Qty = order.Qty.Sub(order.Qty)
 					logrus.Debugf("remain buy[price:%v,qty:%v]", order.Price, order.Qty)
 					if order.Qty.Sign() <= 0 {
 						return
 					}
 				} else {
 					logrus.Debugf("buy[price:%v,qty:%v] is taken all", order.Price, order.Qty)
-					preOrder.Qty.Sub(preOrder.Qty, order.Qty)
+					preOrder.Qty = preOrder.Qty.Sub(order.Qty)
 					logrus.Debugf("remain sell[price:%v,qty:%v]", preOrder.Price, preOrder.Qty)
 					return
 				}
@@ -58,14 +58,14 @@ func (e *Engine) Match(order *types.Order) {
 					logrus.Debugf("buy[price:%v,qty:%v] is taken all", preOrder.Price, preOrder.Qty)
 					n = el.Next()
 					e.BuyDepth.Remove(el)
-					order.Qty.Sub(order.Qty, preOrder.Qty)
+					order.Qty = order.Qty.Sub(preOrder.Qty)
 					logrus.Debugf("remain sell[price:%v,qty:%v]", order.Price, order.Qty)
 					if order.Qty.Sign() <= 0 {
 						return
 					}
 				} else {
 					logrus.Debugf("sell[price:%v,qty:%v] is taken all", order.Price, order.Qty)
-					preOrder.Qty.Sub(preOrder.Qty, order.Qty)
+					preOrder.Qty = preOrder.Qty.Sub(order.Qty)
 					logrus.Debugf("remain buy[price:%v,qty:%v]", preOrder.Price, preOrder.Qty)
 				}
 			} else {

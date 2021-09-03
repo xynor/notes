@@ -2,10 +2,10 @@ package engine
 
 import (
 	"container/list"
+	"github.com/shopspring/decimal"
 	"github.com/sirupsen/logrus"
 	"github.com/xinxuwang/ExchangeX/log"
 	"github.com/xinxuwang/ExchangeX/matchEngine/types"
-	"math/big"
 	"testing"
 )
 
@@ -19,24 +19,24 @@ func TestEngine_MatchBuyComplete(t *testing.T) {
 		Action:    types.Create,
 		Direction: types.Sell,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(1234),
-		Price:     big.NewInt(100),
+		Qty:       decimal.NewFromInt(1234),
+		Price:     decimal.NewFromInt(100),
 	})
 
 	match.Match(&types.Order{
 		Action:    types.Create,
 		Direction: types.Sell,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(12),
-		Price:     big.NewInt(50),
+		Qty:       decimal.NewFromInt(12),
+		Price:     decimal.NewFromInt(50),
 	})
 
 	match.Match(&types.Order{
 		Action:    types.Create,
 		Direction: types.Buy,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(1234),
-		Price:     big.NewInt(100),
+		Qty:       decimal.NewFromInt(1234),
+		Price:     decimal.NewFromInt(100),
 	})
 }
 
@@ -50,23 +50,23 @@ func TestEngine_MatchSellComplete(t *testing.T) {
 		Action:    types.Create,
 		Direction: types.Buy,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(12),
-		Price:     big.NewInt(50),
+		Qty:       decimal.NewFromInt(12),
+		Price:     decimal.NewFromInt(50),
 	})
 
 	match.Match(&types.Order{
 		Action:    types.Create,
 		Direction: types.Buy,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(1234),
-		Price:     big.NewInt(100),
+		Qty:       decimal.NewFromInt(1234),
+		Price:     decimal.NewFromInt(100),
 	})
 
 	match.Match(&types.Order{
 		Action:    types.Create,
 		Direction: types.Sell,
 		Symbol:    "btcusdt",
-		Qty:       big.NewInt(1234),
-		Price:     big.NewInt(100),
+		Qty:       decimal.NewFromInt(1234),
+		Price:     decimal.NewFromInt(100),
 	})
 }

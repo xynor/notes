@@ -49,11 +49,3 @@ type Trade struct {
 	MakerOid string          `json:"maker_oid"`
 	Time     time.Time       `json:"time"`
 }
-
-func AscendOrder(v, current interface{}) bool {
-	return v.(*Order).Price.Cmp(current.(*Order).Price) <= 0 //ascend
-}
-
-func DescendOrder(v, current interface{}) bool {
-	return v.(*Order).Price.Cmp(current.(*Order).Price) >= 0 //descend
-}
