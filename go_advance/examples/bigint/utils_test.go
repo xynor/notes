@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/shopspring/decimal"
+	"math/big"
+	"strings"
 	"testing"
 )
 
@@ -26,4 +28,29 @@ func TestM(t *testing.T) {
 		return
 	}
 	fmt.Println(b)
+}
+
+type A struct {
+	decimal.Decimal
+}
+
+func TestX(t *testing.T) {
+	sb := []byte(`{"p":"0xd34d"}`)
+	type bb struct {
+		B A `json:"p"`
+	}
+	var b bb
+	err := json.Unmarshal(sb, &b)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(b)
+}
+
+func (a *A) UnmarshalJSON(decimalBytes []byte) error {
+	decimalString := strings.Trim(string(decimalBytes), `""`)
+	n, _ := big.NewInt(0).SetString(strings.Trim(decimalString, `0x`), 16)
+	a.Decimal = decimal.NewFromBigInt(n, 0)
+	return nil
 }
