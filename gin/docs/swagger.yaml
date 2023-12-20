@@ -1,0 +1,181 @@
+basePath: /api
+definitions:
+  Account:
+    properties:
+      accountID:
+        type: string
+        x-abc: def
+        x-nullable: true
+        x-omitempty: false
+    type: object
+  PostResp:
+    properties:
+      ID:
+        description: ID description
+        example: 5
+        type: integer
+      Name:
+        description: user's name
+        example: xxxxxxx
+        type: string
+    type: object
+  main.GeneralResp:
+    properties:
+      code:
+        example: 0
+        type: integer
+      data: {}
+      message:
+        example: success
+        type: string
+    type: object
+  main.PostReq:
+    properties:
+      ID:
+        example: 1
+        maximum: 20
+        minimum: 1
+        type: integer
+      Name:
+        example: wxxx
+        type: string
+    required:
+    - ID
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /v1/accounts/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Account'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Account'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Account'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Account'
+      security: []
+      summary: Show an account
+      tags:
+      - accounts
+  /v1/accounts/post:
+    post:
+      consumes:
+      - application/json
+      description: get string by ID
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/main.PostReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.GeneralResp'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/PostResp'
+                  type: array
+              type: object
+        "201":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.GeneralResp'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/PostResp'
+                  type: array
+              type: object
+        "202":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.GeneralResp'
+            - properties:
+                data:
+                  type: object
+              type: object
+        "203":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.GeneralResp'
+            - properties:
+                data:
+                  type: array
+              type: object
+        "204":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.GeneralResp'
+            - properties:
+                data1:
+                  type: string
+                data2:
+                  items:
+                    $ref: '#/definitions/PostResp'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Account'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Account'
+      summary: Post
+      tags:
+      - accounts
+security:
+- apiKey: []
+securityDefinitions:
+  apiKey:
+    in: header
+    name: apiKey
+    type: apiKey
+swagger: "2.0"
