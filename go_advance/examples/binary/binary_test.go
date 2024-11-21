@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/shopspring/decimal"
 	"testing"
 	"unsafe"
+
+	"github.com/shopspring/decimal"
 )
 
 func Test_Complete(t *testing.T) {

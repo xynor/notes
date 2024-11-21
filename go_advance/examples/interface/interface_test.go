@@ -250,3 +250,21 @@ func TestSliceInterface(t *testing.T) {
 	st := []interface{}{"hello", "golang"}
 	work(st)
 }
+
+type Robot struct {
+	Head int
+	Car
+}
+
+func TestStructInterface(t *testing.T) {
+	var robot = Robot{
+		Head: 12,
+		Car: &BMW{
+			Info: Info{
+				Amount: 100,
+				Height: 1,
+			},
+		},
+	}
+	t.Log(robot.Run(12))
+}
